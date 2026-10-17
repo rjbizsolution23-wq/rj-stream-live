@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rj-stream-live",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-03-01",
+  "workers_dev": true,
+  "vars": {
+    "ORGANIZATION": "RJ Business Solutions",
+    "ARCHITECT": "Rick Jefferson, CEO",
+    "VERSION": "1.0.0",
+    "CLOUDROOM_AGENTS_API": "https://rj-cloudroom-core.rickjefferson.workers.dev"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "rj-stream-live-db",
+      "database_id": "a8b2e888-dd25-4d9e-aa72-745a421525f3"
+    }
+  ]
+}

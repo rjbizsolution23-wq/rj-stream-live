@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RJ Stream Live — Sovereign Live Streaming & VIP Broadcast Platform | RJ Business Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rj-blue: #2563eb;
+      --rj-sky: #0ea5e9;
+      --rj-deep: #1e3a8a;
+      --rj-navy: #0f172a;
+      --rj-white: #ffffff;
+      --rj-soft: #f8fafc;
+      --rj-light: #eff6ff;
+      --rj-border: #bfdbfe;
+      --rj-line: #e2e8f0;
+      --rj-text: #0f172a;
+      --rj-muted: #475569;
+      --rj-subtle: #94a3b8;
+      --rj-live: #dc2626;
+      --rj-gold: #d97706;
+      --rj-green: #16a34a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: var(--rj-soft);
+      color: var(--rj-text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    h1, h2, h3, h4, .font-display {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+    }
+    code, pre, .mono {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    /* Executive Header */
+    .hero-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
+      color: #ffffff;
+      padding: 20px 28px;
+      border-bottom: 1px solid rgba(191, 219, 254, 0.25);
+    }
+    .header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      background: #ffffff;
+    }
+    .brand-sub {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #93c5fd;
+      font-weight: 700;
+    }
+    .brand-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #dc2626;
+      color: #ffffff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      box-shadow: 0 0 14px rgba(220, 38, 38, 0.55);
+    }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffffff;
+      animation: pulse 1.2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.25); }
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .role-switcher {
+      display: flex;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(191, 219, 254, 0.3);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+    }
+    .role-btn {
+      border: none;
+      background: transparent;
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 11px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .role-btn.active {
+      background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.35);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 16px;
+      border-radius: 9px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+      color: #ffffff;
+    }
+    .btn-primary:hover { opacity: 0.94; transform: translateY(-1px); }
+    .btn-live {
+      background: #dc2626;
+      color: #ffffff;
+    }
+    .btn-outline {
+      background: #ffffff;
+      color: var(--rj-blue);
+      border-color: var(--rj-border);
+    }
+    .btn-dark-outline {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+      color: #ffffff;
+    }
+    /* Metadata Bar */
+    .meta-bar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--rj-line);
+      padding: 10px 28px;
+    }
+    .meta-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      font-size: 12px;
+    }
+    .meta-item span {
+      color: var(--rj-muted);
+      font-weight: 500;
+      margin-right: 6px;
+    }
+    .meta-item strong {
+      color: var(--rj-text);
+      font-weight: 700;
+    }
+    /* Navigation Tabs */
+    .nav-tabs {
+      max-width: 1440px;
+      margin: 18px auto 0;
+      padding: 0 28px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--rj-line);
+      background: #ffffff;
+      color: var(--rj-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-btn.active {
+      background: var(--rj-light);
+      color: var(--rj-blue);
+      border-color: var(--rj-border);
+    }
+    /* Main Container */
+    .container {
+      max-width: 1440px;
+      margin: 18px auto 48px;
+      padding: 0 28px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--rj-light);
+      color: var(--rj-blue);
+      border: 1px solid var(--rj-border);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .badge-vip {
+      background: #fef3c7;
+      color: #b45309;
+      border-color: #fde68a;
+    }
+    .badge-ppv {
+      background: #fce7f3;
+      color: #be185d;
+      border-color: #fbcfe8;
+    }
+    .badge-free {
+      background: #dcfce7;
+      color: #15803d;
+      border-color: #bbf7d0;
+    }
+    /* Theater Grid */
+    .theater-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 1080px) {
+      .theater-grid { grid-template-columns: 1fr; }
+      .meta-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--rj-line);
+      border-radius: 14px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+    /* Video Stage */
+    .video-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #0f172a;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-stage video,
+    .video-stage canvas,
+    .video-stage img.live-relay-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .stage-top-bar {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .stage-badges {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .viewer-pill {
+      background: rgba(15, 23, 42, 0.82);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+    }
+    .lower-third {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      right: 18px;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.94) 0%, rgba(30, 58, 138, 0.9) 75%, rgba(37, 99, 235, 0.85) 100%);
+      border-left: 4px solid #0ea5e9;
+      border-radius: 10px;
+      padding: 10px 16px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+    .lt-headline {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #38bdf8;
+    }
+    .lt-subline {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f8fafc;
+    }
+    /* Paywall Lock Overlay */
+    .paywall-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 58, 138, 0.94) 100%);
+      z-index: 25;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px;
+      color: #ffffff;
+    }
+    .paywall-overlay.visible {
+      display: flex;
+    }
+    .paywall-box {
+      max-width: 520px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(191, 219, 254, 0.3);
+      border-radius: 16px;
+      padding: 28px;
+      backdrop-filter: blur(12px);
+    }
+    /* Stream Switcher Cards */
+    .channel-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .channel-card {
+      background: #ffffff;
+      border: 2px solid var(--rj-line);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .channel-card:hover {
+      border-color: var(--rj-border);
+      transform: translateY(-1px);
+    }
+    .channel-card.selected {
+      border-color: var(--rj-blue);
+      background: var(--rj-light);
+    }
+    /* Live Chat Panel */
+    .chat-card {
+      display: flex;
+      flex-direction: column;
+      height: 640px;
+    }
+    .chat-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--rj-line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .chat-msg {
+      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid var(--rj-line);
+    }
+    .chat-msg.superchat {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1.5px solid #2563eb;
+    }
+    .chat-author {
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+    .chat-footer {
+      padding: 12px;
+      border-top: 1px solid var(--rj-line);
+      background: #ffffff;
+    }
+    .input, select, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--rj-line);
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--rj-text);
+      background: #ffffff;
+    }
+    .input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--rj-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+    /* Studio & Revenue Panels */
+    .view-panel { display: none; }
+    .view-panel.active { display: block; }
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 980px) {
+      .studio-grid { grid-template-columns: 1fr; }
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .kpi-card {
+      background: #ffffff;
+      border: 1px solid var(--rj-line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .kpi-label {
+      font-size: 11px;
+      font-family: "Space Grotesk", sans-serif;
+      text-transform: uppercase;
+      color: var(--rj-muted);
+      font-weight: 700;
+    }
+    .kpi-val {
+      font-size: 26px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      color: var(--rj-navy);
+      margin-top: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th {
+      background: #f1f5f9;
+      text-align: left;
+      padding: 10px 14px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--rj-muted);
+      border-bottom: 1px solid var(--rj-line);
+    }
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--rj-line);
+    }
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.72);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid var(--rj-border);
+      max-width: 560px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.35);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .meter-bar {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #16a34a 0%, #eab308 75%, #dc2626 100%);
+      transition: width 0.1s;
+    }
+    @media print {
+      .hero-header, .nav-tabs, .chat-footer { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <!-- DARK HERO HEADER -->
+  <header class="hero-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <img class="brand-logo" src="https://storage.googleapis.com/msgsndr/qQnxRHDtyx0uydPd5sRl/media/67eb83c5e519ed689430646b.jpeg" alt="RJ Business Solutions Logo" />
+        <div>
+          <div class="brand-sub">Autonomous Enterprise Architecture · Sovereign Broadcast Network</div>
+          <div class="brand-title">
+            RJ STREAM LIVE
+            <span class="live-pill"><span class="live-dot"></span> ON AIR</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <!-- Instant Role Switcher for Testing Free vs VIP vs Broadcaster -->
+        <div class="role-switcher" title="Instant Demo Account Switcher">
+          <button class="role-btn" id="roleBtnViewer" onclick="quickSwitchRole('viewer@rjbusinesssolutions.org')">👤 Free Viewer</button>
+          <button class="role-btn" id="roleBtnVip" onclick="quickSwitchRole('vip@rjbusinesssolutions.org')">💎 Paid VIP</button>
+          <button class="role-btn active" id="roleBtnCreator" onclick="quickSwitchRole('rick@rjbusinesssolutions.org')">👑 Rick (Broadcaster)</button>
+        </div>
+        <button class="btn btn-gold" onclick="openUpgradeModal()">💎 VIP Pass / Upgrade</button>
+        <button class="btn btn-dark-outline" onclick="openAuthModal()" id="authHeaderBtn">🔐 Login / Register</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- METADATA DETAILS BAR -->
+  <div class="meta-bar">
+    <div class="meta-inner">
+      <div class="meta-item"><span>Logged-In User:</span><strong id="metaUserName">Loading...</strong></div>
+      <div class="meta-item"><span>Membership Tier:</span><strong id="metaUserTier">Checking...</strong></div>
+      <div class="meta-item"><span>Lead Architect:</span><strong>Rick Jefferson, CEO</strong></div>
+      <div class="meta-item"><span>Edge Engine:</span><strong>Cloudflare Stream WebRTC + D1 SQLite</strong></div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION TABS -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" id="tabWatch" onclick="switchTab('watch')">📺 Live Watch Theater & Channels</button>
+    <button class="tab-btn" id="tabStudio" onclick="switchTab('studio')">🎥 Broadcaster Go-Live Studio (Camera / Screen / OBS)</button>
+    <button class="tab-btn" id="tabRevenue" onclick="switchTab('revenue')">💰 Paid Subscribers, PPV & Revenue Ledger</button>
+  </div>
+
+  <main class="container">
+    <!-- =====================================================================
+         TAB 1: LIVE WATCH THEATER & CHANNELS
+         ===================================================================== -->
+    <section class="view-panel active" id="panelWatch">
+      <!-- Channel Selector Strip -->
+      <div class="channel-strip" id="channelStrip"></div>
+
+      <div class="theater-grid">
+        <!-- Left Column: Video Stage + Stream Info -->
+        <div>
+          <div class="card">
+            <div class="video-stage" id="videoStage">
+              <div class="stage-top-bar">
+                <div class="stage-badges">
+                  <span class="live-pill" id="stageLiveBadge"><span class="live-dot"></span> LIVE</span>
+                  <span class="badge" id="stageTierBadge">FREE PUBLIC</span>
+                </div>
+                <div class="viewer-pill" id="stageViewerCount">👁️ 148 Watching · &lt;420ms WebRTC</div>
+              </div>
+
+              <!-- Live Broadcast Video / Canvas / Relay Image -->
+              <video id="viewerVideoEl" autoplay playsinline controls style="display:none;"></video>
+              <img id="viewerRelayImg" class="live-relay-img" style="display:none;" alt="Live Broadcast Feed" />
+              <canvas id="viewerSimCanvas" width="1280" height="720"></canvas>
+
+              <!-- Lower Third Overlay -->
+              <div class="lower-third">
+                <div>
+                  <div class="lt-headline" id="stageLtHeadline">LIVE NOW · RJ BUSINESS SOLUTIONS</div>
+                  <div class="lt-subline" id="stageLtSubline">Rick Jefferson, CEO · Autonomous Enterprise Systems</div>
+                </div>
+                <div class="mono" style="font-size:12px; color:#93c5fd;" id="stageClock">00:00:00 UTC</div>
+              </div>
+
+              <!-- Server-Enforced Paywall Lock Overlay (Shown when Free Viewer clicks VIP/PPV Stream) -->
+              <div class="paywall-overlay" id="paywallOverlay">
+                <div class="paywall-box">
+                  <span class="badge badge-vip" id="paywallBadge" style="margin-bottom:12px;">🔒 PAID SUBSCRIBERS ONLY</span>
+                  <h2 style="font-size:22px; margin-bottom:8px;" id="paywallTitle">VIP Subscriber Stream Locked</h2>
+                  <p style="font-size:13px; color:#cbd5e1; margin-bottom:20px;" id="paywallDesc">
+                    This live broadcast is restricted to paid RJ Business Solutions VIP Members or Pay-Per-View ticket holders. Upgrade your account below for instant access.
+                  </p>
+                  <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+                    <button class="btn btn-gold" onclick="openUpgradeModal()">💎 Unlock VIP All-Access ($29/mo)</button>
+                    <button class="btn btn-primary" id="btnUnlockPpvDirect" onclick="unlockCurrentPpvStream()">🎟️ Buy Single PPV Ticket ($49)</button>
+                  </div>
+                  <div style="margin-top:14px; font-size:11px; color:#94a3b8;">
+                    Instant activation via Card, Stripe, or Zelle (<code>rjbizsolution23@gmail.com</code>)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stream Details Footer -->
+            <div style="padding:18px 20px;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap;">
+                <div>
+                  <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+                    <span class="badge" id="infoCategory">AI & Enterprise Systems</span>
+                    <span style="font-size:12px; color:var(--rj-muted);">Hosted by <strong id="infoCreator">Rick Jefferson, CEO</strong></span>
+                  </div>
+                  <h2 style="font-size:20px; color:var(--rj-navy);" id="infoTitle">Select a Live Channel</h2>
+                  <p style="font-size:13px; color:var(--rj-muted); margin-top:4px;" id="infoDesc"></p>
+                </div>
+                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                  <button class="btn btn-outline" onclick="sendQuickReaction('🔥')">🔥 Fire</button>
+                  <button class="btn btn-outline" onclick="sendQuickReaction('💎')">💎 VIP</button>
+                  <button class="btn btn-gold" onclick="openSuperchatModal()">💸 Send SuperChat Tip</button>
+                  <button class="btn btn-primary" onclick="switchTab('studio')">🎥 Open Broadcaster Studio</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Live Chat & SuperChat Feed -->
+        <div class="card chat-card">
+          <div class="chat-header">
+            <div>
+              <h3 style="font-size:15px;">💬 Live Stream Chat & SuperChats</h3>
+              <div style="font-size:11px; color:var(--rj-muted);">Real-Time Cloudflare D1 Edge Sync</div>
+            </div>
+            <span class="badge" id="chatTotalTipsBadge">Tips: $0.00</span>
+          </div>
+
+          <div class="chat-messages" id="chatMessagesBox"></div>
+
+          <div class="chat-footer">
+            <form onsubmit="submitChatMessage(event)" style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; gap:8px;">
+                <input class="input" id="chatInput" placeholder="Write a live message..." required />
+                <button type="submit" class="btn btn-primary">Send</button>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:11px; color:var(--rj-muted);">Posting as <strong id="chatPostingAs">...</strong></span>
+                <button type="button" class="btn btn-gold" style="padding:4px 10px; font-size:11px;" onclick="openSuperchatModal()">+ Add Paid SuperChat Tip</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 2: BROADCASTER GO-LIVE STUDIO (WEBCAM / SCREEN SHARE / WHIP / OBS)
+         ===================================================================== -->
+    <section class="view-panel" id="panelStudio">
+      <div class="studio-grid">
+        <!-- Left: Live Camera / Screen Share Broadcast Monitor -->
+        <div class="card" style="padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+            <div>
+              <span class="badge">🎥 SOVEREIGN BROADCASTER STUDIO</span>
+              <h2 style="font-size:19px; margin-top:4px;">Go Live from Browser Camera, Screen Share, or OBS</h2>
+            </div>
+            <span class="live-pill" id="studioStatusPill" style="background:#475569;"><span class="live-dot"></span> STANDBY</span>
+          </div>
+
+          <div class="video-stage" style="border-radius:12px; margin-bottom:14px;">
+            <video id="studioPreviewVideo" autoplay muted playsinline style="display:none;"></video>
+            <canvas id="studioCompositeCanvas" width="960" height="540"></canvas>
+            <div class="lower-third">
+              <div>
+                <div class="lt-headline" id="studioLtHeadlinePreview">LIVE NOW · RJ BUSINESS SOLUTIONS</div>
+                <div class="lt-subline" id="studioLtSublinePreview">Rick Jefferson, CEO · Sovereign Broadcast Studio</div>
+              </div>
+              <div class="mono" style="font-size:11px; color:#38bdf8;" id="studioTelemetryLabel">60 FPS · WebRTC Ready</div>
+            </div>
+          </div>
+
+          <!-- Audio Mic Level Meter -->
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+              <span style="font-weight:600; color:var(--rj-muted);">🎙️ Microphone Audio Input Level</span>
+              <span class="mono" id="micDbLabel">-∞ dB</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" id="micMeterFill"></div></div>
+          </div>
+
+          <!-- Studio Hardware & Broadcast Buttons -->
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="startStudioCamera()">📷 1. Start Camera + Mic</button>
+            <button class="btn btn-outline" onclick="startStudioScreenShare()">🖥️ Or Share Screen</button>
+            <button class="btn btn-live" id="btnGoLiveNow" onclick="toggleBroadcastLive()">🔴 2. GO LIVE TO VIEWERS NOW</button>
+            <button class="btn btn-outline" onclick="stopStudioMedia()">⏹️ Stop Camera</button>
+          </div>
+          <p style="font-size:12px; color:var(--rj-muted); margin-top:10px;" id="studioStatusNote">
+            Tip: Click <strong>Start Camera + Mic</strong> (or <strong>Share Screen</strong>), then click <strong>GO LIVE TO VIEWERS NOW</strong>. Your live video stream is immediately broadcast via Cloudflare Edge Relay + WebRTC to all logged-in viewers on the Selected Channel!
+          </p>
+        </div>
+
+        <!-- Right: Channel Paywall Configuration, Create New Stream & OBS/WHIP Credentials -->
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <!-- Update Active Stream & Paywall Mode -->
+          <div class="card" style="padding:20px;">
+            <span class="badge">🔒 STREAM ACCESS & PAYWALL CONTROL</span>
+            <h3 style="font-size:16px; margin:6px 0 12px;">Configure Active Channel & Paid Gating</h3>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div>
+                <label style="font-size:12px; font-weight:600;">Target Broadcast Channel</label>
+                <select id="studioChannelSelect" onchange="populateStudioChannelForm()"></select>
+              </div>
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <div>
+                  <label style="font-size:12px; font-weight:600;">Access / Paywall Mode</label>
+                  <select id="studioAccessTier">
+                    <option value="free">🟢 Free Public (All Logged-In Viewers)</option>
+                    <option value="vip">💎 VIP Subscribers Only ($29/mo)</option>
+                    <option value="ppv">🎟️ Pay-Per-View Event Ticket</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size:12px; font-weight:600;">PPV Ticket Price ($ USD)</label>
+                  <input class="input" type="number" id="studioPpvPrice" value="49" min="0" step="1" />
+                </div>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:600;">Lower-Third Headline Overlay</label>
+                <input class="input" id="studioLtHeadlineInput" value="LIVE NOW · RJ BUSINESS SOLUTIONS" />
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:600;">Lower-Third Subline Overlay</label>
+                <input class="input" id="studioLtSublineInput" value="Rick Jefferson, CEO · Autonomous Enterprise Systems" />
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:600;">Cloudflare Stream WHEP / HLS Playback URL (Optional External Feed)</label>
+                <input class="input mono" id="studioWhepInput" placeholder="https://customer-<code>.cloudflarestream.com/<uid>/webRTC/play" />
+              </div>
+              <button class="btn btn-primary" onclick="saveStudioChannelSettings()">💾 Save Channel & Paywall Settings</button>
+            </div>
+          </div>
+
+          <!-- Create New Live Channel -->
+          <div class="card" style="padding:20px;">
+            <span class="badge">➕ CREATE NEW LIVE BROADCAST ROOM</span>
+            <h3 style="font-size:16px; margin:6px 0 12px;">Launch a New Free, VIP, or Pay-Per-View Stream</h3>
+            <form onsubmit="createNewStreamChannel(event)" style="display:flex; flex-direction:column; gap:10px;">
+              <input class="input" id="newStreamTitle" placeholder="Stream Title (e.g., VIP Credit & AI Masterclass)" required />
+              <input class="input" id="newStreamDesc" placeholder="Stream Description & Agenda" required />
+              <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:8px;">
+                <input class="input" id="newStreamCategory" value="VIP Broadcast" placeholder="Category" required />
+                <select id="newStreamTier">
+                  <option value="free">Free Public</option>
+                  <option value="vip" selected>VIP Only ($29/mo)</option>
+                  <option value="ppv">Pay-Per-View</option>
+                </select>
+                <input class="input" type="number" id="newStreamPpvUsd" value="49" placeholder="PPV $" />
+              </div>
+              <button type="submit" class="btn btn-primary">🚀 Create & Go Live on New Channel</button>
+            </form>
+          </div>
+
+          <!-- OBS Studio / Cloudflare WHIP Credentials -->
+          <div class="card" style="padding:18px; background:var(--rj-light); border-color:var(--rj-border);">
+            <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; color:var(--rj-deep); text-transform:uppercase;">
+              📡 OBS Studio v31+ WHIP / RTMP Ingest Credentials
+            </div>
+            <div style="font-size:12px; margin-top:6px;">
+              <div><strong>RTMP Server:</strong> <code id="obsRtmpUrl">rtmps://live.cloudflare.com:443/live/</code></div>
+              <div style="margin-top:4px;"><strong>Stream Key:</strong> <code id="obsStreamKey">rj_live_key_...</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 3: PAID SUBSCRIBERS, PPV & REVENUE LEDGER
+         ===================================================================== -->
+    <section class="view-panel" id="panelRevenue">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Live & Subscription Revenue</div>
+          <div class="kpi-val" id="kpiTotalRevenue">$0.00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Active Paid VIP & Executive Members</div>
+          <div class="kpi-val" id="kpiPaidSubscribers">0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">SuperChat Tips Collected</div>
+          <div class="kpi-val" id="kpiTotalTips">$0.00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Active Live Broadcast Channels</div>
+          <div class="kpi-val" id="kpiTotalStreams">3</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <div style="padding:16px 20px; border-bottom:1px solid var(--rj-line); display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <span class="badge">📊 REAL-TIME D1 LEDGER</span>
+            <h3 style="font-size:17px; margin-top:4px;">VIP Subscriptions, Pay-Per-View Tickets & SuperChat Transactions</h3>
+          </div>
+          <button class="btn btn-outline" onclick="loadRevenueLedger()">🔄 Refresh Ledger</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Transaction ID</th>
+                <th>Member / Viewer</th>
+                <th>Type</th>
+                <th>Payment Method</th>
+                <th>Note</th>
+                <th>Amount</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="ledgerTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Official RJ Business Solutions Payment Instructions -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
+        <div class="card" style="padding:18px; border-color:var(--rj-border);">
+          <span class="badge">⚡ PRIMARY INSTANT SETTLEMENT (ZELLE)</span>
+          <h4 style="font-size:16px; margin-top:8px;">RJ Business Solutions — Official Zelle</h4>
+          <p style="font-size:13px; color:var(--rj-muted); margin-top:4px;">
+            Zelle Recipient: <strong><code>rjbizsolution23@gmail.com</code></strong><br />
+            Account Name: <strong>RJ Business Solutions (Rick Jefferson)</strong>
+          </p>
+        </div>
+        <div class="card" style="padding:18px; border-color:var(--rj-border);">
+          <span class="badge">🏦 DOMESTIC WIRE & ENTERPRISE BILLING</span>
+          <h4 style="font-size:16px; margin-top:8px;">Wells Fargo Bank — Commercial Settlement</h4>
+          <p style="font-size:13px; color:var(--rj-muted); margin-top:4px;">
+            Routing Number: <strong><code>121000248</code></strong> (Wells Fargo)<br />
+            Beneficiary: <strong>RJ Business Solutions · 1342 NM 333, Tijeras, NM 87059</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =======================================================================
+       MODAL 1: LOGIN / REGISTER / SWITCH ACCOUNT
+       ======================================================================= -->
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <span class="badge">🔐 VIEWER & CREATOR AUTHENTICATION</span>
+          <h3 style="font-size:19px; margin-top:4px;">Sign In or Create Viewer Account</h3>
+        </div>
+        <button class="btn btn-outline" onclick="closeModals()">✕</button>
+      </div>
+
+      <form onsubmit="handleAuthSubmit(event)" style="display:flex; flex-direction:column; gap:12px;">
+        <div>
+          <label style="font-size:12px; font-weight:600;">Mode</label>
+          <select id="authModeSelect" onchange="toggleAuthMode()">
+            <option value="login">Sign In with Existing Account</option>
+            <option value="register">Create New Viewer / Subscriber Account</option>
+          </select>
+        </div>
+        <div id="authNameRow" style="display:none;">
+          <label style="font-size:12px; font-weight:600;">Full Name</label>
+          <input class="input" id="authNameInput" placeholder="Your Full Name" />
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:600;">Email Address</label>
+          <input class="input" type="email" id="authEmailInput" value="viewer@rjbusinesssolutions.org" required />
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:600;">Password</label>
+          <input class="input" type="password" id="authPasswordInput" value="rj2026live" required />
+        </div>
+        <div id="authRegisterTierRow" style="display:none;">
+          <label style="font-size:12px; font-weight:600;">Starting Membership Plan</label>
+          <select id="authRegisterTier">
+            <option value="free">Free Viewer Account ($0)</option>
+            <option value="vip_monthly">💎 Paid VIP Monthly Subscriber ($29/mo)</option>
+            <option value="executive_annual">👑 Executive Annual All-Access + PPV ($299/yr)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Continue to RJ Stream Live</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL 2: VIP SUBSCRIPTION & PAY-PER-VIEW CHECKOUT
+       ======================================================================= -->
+  <div class="modal-backdrop" id="upgradeModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <span class="badge badge-vip">💎 INSTANT STREAM UNLOCK & VIP UPGRADE</span>
+          <h3 style="font-size:19px; margin-top:4px;">Upgrade to Paid VIP or Unlock PPV Event</h3>
+        </div>
+        <button class="btn btn-outline" onclick="closeModals()">✕</button>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:16px;">
+        <div style="border:2px solid var(--rj-blue); background:var(--rj-light); border-radius:12px; padding:14px;">
+          <div class="badge">MOST POPULAR</div>
+          <h4 style="font-size:16px; margin-top:6px;">VIP Monthly All-Access</h4>
+          <div style="font-size:24px; font-weight:700; font-family:'Space Grotesk',sans-serif; margin:4px 0;">$29<span style="font-size:13px; color:var(--rj-muted);">/month</span></div>
+          <p style="font-size:12px; color:var(--rj-muted); margin-bottom:12px;">Unlocks all VIP-Only live streams, inner-circle chat badge, and replay vault.</p>
+          <button class="btn btn-primary" style="width:100%;" onclick="purchaseSubscription('vip_monthly')">Activate VIP ($29/mo)</button>
+        </div>
+
+        <div style="border:2px solid #d97706; background:#fffbeb; border-radius:12px; padding:14px;">
+          <div class="badge badge-vip">EXECUTIVE PASS</div>
+          <h4 style="font-size:16px; margin-top:6px;">Executive Annual + PPV</h4>
+          <div style="font-size:24px; font-weight:700; font-family:'Space Grotesk',sans-serif; margin:4px 0;">$299<span style="font-size:13px; color:var(--rj-muted);">/year</span></div>
+          <p style="font-size:12px; color:var(--rj-muted); margin-bottom:12px;">Unlocks EVERY VIP stream AND all Pay-Per-View live bootcamps automatically.</p>
+          <button class="btn btn-gold" style="width:100%;" onclick="purchaseSubscription('executive_annual')">Activate Executive ($299/yr)</button>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--rj-line); padding-top:14px;">
+        <label style="font-size:12px; font-weight:600;">Payment Settlement Method</label>
+        <select id="checkoutPaymentMethod" style="margin-top:4px; margin-bottom:10px;">
+          <option value="stripe_card">💳 Instant Card / Stripe Express Checkout</option>
+          <option value="zelle">⚡ Official RJ Zelle (rjbizsolution23@gmail.com)</option>
+          <option value="wire">🏦 Wells Fargo Domestic Wire (Routing 121000248)</option>
+        </select>
+        <button class="btn btn-outline" style="width:100%;" onclick="unlockCurrentPpvStream()">🎟️ Or Buy Single Pay-Per-View Ticket for Current Stream</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL 3: SEND PAID SUPERCHAT TIP
+       ======================================================================= -->
+  <div class="modal-backdrop" id="superchatModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <span class="badge badge-vip">💸 LIVE SUPERCHAT TIP</span>
+          <h3 style="font-size:19px; margin-top:4px;">Support Rick Jefferson Live on Stream</h3>
+        </div>
+        <button class="btn btn-outline" onclick="closeModals()">✕</button>
+      </div>
+      <form onsubmit="submitSuperchat(event)" style="display:flex; flex-direction:column; gap:12px;">
+        <div>
+          <label style="font-size:12px; font-weight:600;">Select SuperChat Amount ($ USD)</label>
+          <div style="display:flex; gap:8px; margin-top:6px;">
+            <button type="button" class="btn btn-outline" onclick="document.getElementById('superchatAmount').value=10">$10</button>
+            <button type="button" class="btn btn-outline" onclick="document.getElementById('superchatAmount').value=25">$25</button>
+            <button type="button" class="btn btn-outline" onclick="document.getElementById('superchatAmount').value=50">$50</button>
+            <button type="button" class="btn btn-outline" onclick="document.getElementById('superchatAmount').value=100">$100</button>
+          </div>
+          <input class="input" type="number" id="superchatAmount" value="25" min="1" style="margin-top:8px;" required />
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:600;">Highlighted Live Message</label>
+          <input class="input" id="superchatMessage" value="Let's go RJ Business Solutions!! 🔥🚀" required />
+        </div>
+        <button type="submit" class="btn btn-gold" style="width:100%;">💸 Send Highlighted SuperChat Now</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- LEGAL FOOTER -->
+  <footer style="max-width:1440px; margin:0 auto 36px; padding:0 28px; font-size:12px; color:var(--rj-muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; border-top:1px solid var(--rj-line); padding-top:18px;">
+    <div>
+      <strong>RJ Business Solutions</strong> · 1342 NM 333, Tijeras, New Mexico 87059 · <a href="https://rjbusinesssolutions.org" target="_blank" style="color:var(--rj-blue);">rjbusinesssolutions.org</a>
+    </div>
+    <div>
+      <em>RJ Business Solutions provides software and automation technology. Not financial or legal advice.</em>
+    </div>
+  </footer>
+
+  <script>
+    let authToken = localStorage.getItem("rj_stream_token") || "";
+    let currentUser = null;
+    let streams = [];
+    let selectedStreamId = "str_sovereign_keynote";
+    let selectedStreamWatchData = null;
+
+    // Broadcaster Studio State
+    let studioMediaStream = null;
+    let isBroadcastingLive = false;
+    let broadcastInterval = null;
+    let audioContext = null;
+    let audioAnalyser = null;
+    let currentMicLevel = 0;
+
+    async function apiFetch(path, options = {}) {
+      const headers = Object.assign({ "Content-Type": "application/json" }, options.headers || {});
+      if (authToken) headers["Authorization"] = `Bearer ${authToken}`;
+      const res = await fetch(path, Object.assign({}, options, { headers }));
+      const data = await res.json().catch(() => ({}));
+      return { status: res.status, ok: res.ok, data };
+    }
+
+    async function initApp() {
+      // If no token, default to Rick (Broadcaster) so studio & streams are immediately visible
+      if (!authToken) {
+        await quickSwitchRole("rick@rjbusinesssolutions.org", true);
+      } else {
+        const me = await apiFetch("/api/auth/me");
+        if (me.ok && me.data.user) {
+          currentUser = me.data.user;
+          updateUserUI();
+        } else {
+          await quickSwitchRole("rick@rjbusinesssolutions.org", true);
+        }
+      }
+      await loadStreams();
+      await selectStream(selectedStreamId);
+      await loadRevenueLedger();
+
+      // Poll live chat, viewer frame relay & telemetry every 2.2 seconds
+      setInterval(async () => {
+        if (selectedStreamId) {
+          await pollLiveFrameAndChat();
+        }
+      }, 2200);
+
+      // Start animated canvas loop for viewer & studio
+      requestAnimationFrame(renderBroadcastLoop);
+    }
+
+    function updateUserUI() {
+      if (!currentUser) return;
+      document.getElementById("metaUserName").textContent = `${currentUser.name} (${currentUser.email})`;
+      const tierLabels = {
+        free: "🟢 Free Viewer Account",
+        vip_monthly: "💎 Paid VIP Monthly ($29/mo)",
+        executive_annual: "👑 Executive Annual + PPV All-Access"
+      };
+      document.getElementById("metaUserTier").textContent = tierLabels[currentUser.subscription_tier] || currentUser.subscription_tier;
+      document.getElementById("chatPostingAs").textContent = currentUser.name;
+
+      document.getElementById("roleBtnViewer").classList.toggle("active", currentUser.email === "viewer@rjbusinesssolutions.org" && currentUser.subscription_tier === "free");
+      document.getElementById("roleBtnVip").classList.toggle("active", currentUser.email === "vip@rjbusinesssolutions.org" || currentUser.subscription_tier === "vip_monthly");
+      document.getElementById("roleBtnCreator").classList.toggle("active", currentUser.role === "creator");
+    }
+
+    async function quickSwitchRole(email, silent = false) {
+      const res = await apiFetch("/api/auth/quick-switch", {
+        method: "POST",
+        body: JSON.stringify({ email })
+      });
+      if (res.ok && res.data.token) {
+        authToken = res.data.token;
+        localStorage.setItem("rj_stream_token", authToken);
+        currentUser = res.data.user;
+        updateUserUI();
+        if (!silent) {
+          await loadStreams();
+          await selectStream(selectedStreamId);
+        }
+      }
+    }
+
+    async function loadStreams() {
+      const res = await apiFetch("/api/streams");
+      if (!res.ok) return;
+      streams = res.data.streams || [];
+      renderChannelStrip();
+      populateStudioDropdown();
+    }
+
+    function renderChannelStrip() {
+      const strip = document.getElementById("channelStrip");
+      strip.innerHTML = streams.map(s => {
+        const tierBadge = s.access_tier === "vip"
+          ? `<span class="badge badge-vip">💎 VIP ONLY ($29/mo)</span>`
+          : s.access_tier === "ppv"
+          ? `<span class="badge badge-ppv">🎟️ PPV ($${(s.ppv_price_cents / 100).toFixed(0)})</span>`
+          : `<span class="badge badge-free">🟢 FREE PUBLIC</span>`;
+        const lockIcon = s.has_access ? "🔓 Unlocked" : "🔒 Locked";
+        return `
+          <div class="channel-card ${s.id === selectedStreamId ? 'selected' : ''}" onclick="selectStream('${s.id}')">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              ${tierBadge}
+              <span style="font-size:11px; font-weight:700; color:${s.has_access ? '#16a34a' : '#dc2626'};">${lockIcon} · 👁️ ${s.viewer_count}</span>
+            </div>
+            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; color:var(--rj-navy);">${escapeHtml(s.title)}</div>
+            <div style="font-size:12px; color:var(--rj-muted); margin-top:3px;">${escapeHtml(s.category)} · Tips: $${(s.total_tips_cents / 100).toFixed(2)}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    async function selectStream(streamId) {
+      selectedStreamId = streamId;
+      renderChannelStrip();
+      const s = streams.find(x => x.id === streamId);
+      if (s) {
+        document.getElementById("infoTitle").textContent = s.title;
+        document.getElementById("infoDesc").textContent = s.description;
+        document.getElementById("infoCategory").textContent = s.category;
+        document.getElementById("infoCreator").textContent = s.creator_name;
+        document.getElementById("stageViewerCount").textContent = `👁️ ${s.viewer_count} Watching · <420ms WebRTC`;
+        document.getElementById("chatTotalTipsBadge").textContent = `Tips: $${(s.total_tips_cents / 100).toFixed(2)}`;
+        document.getElementById("stageTierBadge").textContent =
+          s.access_tier === "vip" ? "💎 VIP SUBSCRIBERS ONLY" :
+          s.access_tier === "ppv" ? `🎟️ PAY-PER-VIEW ($${(s.ppv_price_cents / 100).toFixed(2)})` :
+          "🟢 FREE PUBLIC STREAM";
+      }
+
+      // Call server-side watch gate (/api/streams/:id/watch)
+      const watchRes = await apiFetch(`/api/streams/${streamId}/watch`);
+      const overlay = document.getElementById("paywallOverlay");
+      if (watchRes.status === 402) {
+        selectedStreamWatchData = null;
+        overlay.classList.add("visible");
+        document.getElementById("paywallTitle").textContent = watchRes.data.error || "Paid Stream Locked";
+        document.getElementById("paywallDesc").textContent = watchRes.data.message || "Upgrade your account to watch this live broadcast.";
+        const ppvDollars = ((watchRes.data.ppv_price_cents || 4900) / 100).toFixed(2);
+        document.getElementById("btnUnlockPpvDirect").textContent = `🎟️ Unlock PPV Ticket ($${ppvDollars})`;
+      } else if (watchRes.ok) {
+        selectedStreamWatchData = watchRes.data.stream;
+        overlay.classList.remove("visible");
+        document.getElementById("stageLtHeadline").textContent = selectedStreamWatchData.lower_third_headline || "LIVE NOW · RJ BUSINESS SOLUTIONS";
+        document.getElementById("stageLtSubline").textContent = selectedStreamWatchData.lower_third_subline || "Rick Jefferson, CEO";
+        connectExternalWhepOrHlsIfConfigured(selectedStreamWatchData);
+      }
+
+      await loadChatMessages();
+    }
+
+    async function connectExternalWhepOrHlsIfConfigured(streamObj) {
+      const videoEl = document.getElementById("viewerVideoEl");
+      if (streamObj.whep_url && streamObj.whep_url.startsWith("https://")) {
+        try {
+          const pc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.cloudflare.com:3478" }] });
+          pc.addTransceiver("video", { direction: "recvonly" });
+          pc.addTransceiver("audio", { direction: "recvonly" });
+          pc.ontrack = (ev) => {
+            videoEl.srcObject = ev.streams[0];
+            videoEl.style.display = "block";
+            document.getElementById("viewerSimCanvas").style.display = "none";
+          };
+          const offer = await pc.createOffer();
+          await pc.setLocalDescription(offer);
+          const res = await fetch(streamObj.whep_url, {
+            method: "POST",
+            body: offer.sdp,
+            headers: { "Content-Type": "application/sdp" }
+          });
+          if (res.ok) {
+            const answerSdp = await res.text();
+            await pc.setRemoteDescription({ type: "answer", sdp: answerSdp });
+            return;
+          }
+        } catch (err) {
+          console.warn("WHEP fallback to edge relay:", err);
+        }
+      }
+      videoEl.style.display = "none";
+    }
+
+    async function pollLiveFrameAndChat() {
+      await loadChatMessages();
+      if (!selectedStreamWatchData) return;
+      const frameRes = await apiFetch(`/api/streams/${selectedStreamId}/frame`);
+      if (frameRes.ok && frameRes.data) {
+        const relayImg = document.getElementById("viewerRelayImg");
+        const simCanvas = document.getElementById("viewerSimCanvas");
+        document.getElementById("stageViewerCount").textContent = `👁️ ${frameRes.data.viewer_count || 148} Watching · <420ms WebRTC`;
+        document.getElementById("chatTotalTipsBadge").textContent = `Tips: $${((frameRes.data.total_tips_cents || 0) / 100).toFixed(2)}`;
+        document.getElementById("stageLtHeadline").textContent = frameRes.data.lower_third_headline || "LIVE NOW · RJ BUSINESS SOLUTIONS";
+        document.getElementById("stageLtSubline").textContent = frameRes.data.lower_third_subline || "Rick Jefferson, CEO";
+
+        // If broadcaster pushed a live camera/screen frame within last 15 seconds, display it live!
+        const ageMs = Date.now() - (frameRes.data.live_frame_updated_at || 0);
+        if (frameRes.data.live_frame_data && ageMs < 15000) {
+          relayImg.src = frameRes.data.live_frame_data;
+          relayImg.style.display = "block";
+          simCanvas.style.display = "none";
+        } else {
+          relayImg.style.display = "none";
+          simCanvas.style.display = "block";
+        }
+      }
+    }
+
+    async function loadChatMessages() {
+      const res = await apiFetch(`/api/streams/${selectedStreamId}/chat`);
+      if (!res.ok) return;
+      const box = document.getElementById("chatMessagesBox");
+      const msgs = res.data.messages || [];
+      box.innerHTML = msgs.map(m => {
+        const roleBadge = m.user_role === "creator"
+          ? `<span class="badge" style="font-size:10px; padding:1px 6px;">👑 HOST</span>`
+          : (m.user_tier === "vip_monthly" || m.user_tier === "executive_annual")
+          ? `<span class="badge badge-vip" style="font-size:10px; padding:1px 6px;">💎 VIP</span>`
+          : `<span class="badge badge-free" style="font-size:10px; padding:1px 6px;">MEMBER</span>`;
+        const tipTag = m.is_superchat
+          ? `<span class="badge badge-vip" style="margin-left:auto;">💸 $${(m.tip_amount_cents / 100).toFixed(2)} SUPERCHAT</span>`
+          : "";
+        return `
+          <div class="chat-msg ${m.is_superchat ? 'superchat' : ''}">
+            <div class="chat-author">
+              ${roleBadge}
+              <span>${escapeHtml(m.user_name)}</span>
+              ${tipTag}
+            </div>
+            <div>${escapeHtml(m.message)}</div>
+          </div>
+        `;
+      }).join("");
+      box.scrollTop = box.scrollHeight;
+    }
+
+    async function submitChatMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById("chatInput");
+      const message = input.value.trim();
+      if (!message) return;
+      input.value = "";
+      await apiFetch(`/api/streams/${selectedStreamId}/chat`, {
+        method: "POST",
+        body: JSON.stringify({ message, tip_amount_cents: 0 })
+      });
+      await loadChatMessages();
+    }
+
+    async function sendQuickReaction(emoji) {
+      await apiFetch(`/api/streams/${selectedStreamId}/chat`, {
+        method: "POST",
+        body: JSON.stringify({ message: `${emoji} ${emoji} Sent live reaction from theater!`, tip_amount_cents: 0 })
+      });
+      await loadChatMessages();
+    }
+
+    async function submitSuperchat(e) {
+      e.preventDefault();
+      const amountUsd = parseFloat(document.getElementById("superchatAmount").value || "25");
+      const message = document.getElementById("superchatMessage").value.trim();
+      const res = await apiFetch(`/api/streams/${selectedStreamId}/chat`, {
+        method: "POST",
+        body: JSON.stringify({
+          message,
+          tip_amount_cents: Math.round(amountUsd * 100)
+        })
+      });
+      if (res.ok) {
+        closeModals();
+        await loadStreams();
+        await loadChatMessages();
+        await loadRevenueLedger();
+      }
+    }
+
+    // =========================================================================
+    // SUBSCRIPTION & PAY-PER-VIEW UNLOCK FLOWS
+    // =========================================================================
+    async function purchaseSubscription(planTier) {
+      const paymentMethod = document.getElementById("checkoutPaymentMethod").value;
+      const res = await apiFetch("/api/monetization/subscribe", {
+        method: "POST",
+        body: JSON.stringify({ tier: planTier, payment_method: paymentMethod })
+      });
+      if (res.ok) {
+        currentUser = res.data.user;
+        updateUserUI();
+        closeModals();
+        await loadStreams();
+        await selectStream(selectedStreamId);
+        await loadRevenueLedger();
+      }
+    }
+
+    async function unlockCurrentPpvStream() {
+      const paymentMethod = document.getElementById("checkoutPaymentMethod")
+        ? document.getElementById("checkoutPaymentMethod").value
+        : "stripe_card";
+      const res = await apiFetch("/api/monetization/unlock-ppv", {
+        method: "POST",
+        body: JSON.stringify({ stream_id: selectedStreamId, payment_method: paymentMethod })
+      });
+      if (res.ok) {
+        closeModals();
+        await loadStreams();
+        await selectStream(selectedStreamId);
+        await loadRevenueLedger();
+      }
+    }
+
+    // =========================================================================
+    // BROADCASTER GO-LIVE STUDIO (WEBCAM / SCREEN SHARE + EDGE RELAY)
+    // =========================================================================
+    function populateStudioDropdown() {
+      const sel = document.getElementById("studioChannelSelect");
+      if (!sel) return;
+      sel.innerHTML = streams.map(s => `<option value="${s.id}" ${s.id === selectedStreamId ? 'selected' : ''}>${escapeHtml(s.title)} (${s.access_tier.toUpperCase()})</option>`).join("");
+      populateStudioChannelForm();
+    }
+
+    function populateStudioChannelForm() {
+      const id = document.getElementById("studioChannelSelect").value;
+      const s = streams.find(x => x.id === id);
+      if (!s) return;
+      document.getElementById("studioAccessTier").value = s.access_tier;
+      document.getElementById("studioPpvPrice").value = Math.round((s.ppv_price_cents || 0) / 100);
+      document.getElementById("studioLtHeadlineInput").value = s.lower_third_headline || "LIVE NOW · RJ BUSINESS SOLUTIONS";
+      document.getElementById("studioLtSublineInput").value = s.lower_third_subline || "Rick Jefferson, CEO";
+      document.getElementById("studioWhepInput").value = s.whep_url || "";
+      document.getElementById("obsStreamKey").textContent = s.stream_key || "rj_live_key_99481a";
+      document.getElementById("studioLtHeadlinePreview").textContent = s.lower_third_headline || "LIVE NOW · RJ BUSINESS SOLUTIONS";
+      document.getElementById("studioLtSublinePreview").textContent = s.lower_third_subline || "Rick Jefferson, CEO";
+    }
+
+    async function saveStudioChannelSettings() {
+      const id = document.getElementById("studioChannelSelect").value;
+      const access_tier = document.getElementById("studioAccessTier").value;
+      const ppv_price_cents = Math.round(parseFloat(document.getElementById("studioPpvPrice").value || "0") * 100);
+      const lower_third_headline = document.getElementById("studioLtHeadlineInput").value;
+      const lower_third_subline = document.getElementById("studioLtSublineInput").value;
+      const whep_url = document.getElementById("studioWhepInput").value;
+
+      const res = await apiFetch(`/api/streams/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ access_tier, ppv_price_cents, lower_third_headline, lower_third_subline, whep_url })
+      });
+      if (res.ok) {
+        document.getElementById("studioLtHeadlinePreview").textContent = lower_third_headline;
+        document.getElementById("studioLtSublinePreview").textContent = lower_third_subline;
+        await loadStreams();
+        await selectStream(id);
+        document.getElementById("studioStatusNote").textContent = "✅ Saved channel paywall & overlay settings!";
+      }
+    }
+
+    async function createNewStreamChannel(e) {
+      e.preventDefault();
+      const title = document.getElementById("newStreamTitle").value.trim();
+      const description = document.getElementById("newStreamDesc").value.trim();
+      const category = document.getElementById("newStreamCategory").value.trim();
+      const access_tier = document.getElementById("newStreamTier").value;
+      const ppv_price_cents = Math.round(parseFloat(document.getElementById("newStreamPpvUsd").value || "49") * 100);
+
+      const res = await apiFetch("/api/streams", {
+        method: "POST",
+        body: JSON.stringify({ title, description, category, access_tier, ppv_price_cents })
+      });
+      if (res.ok && res.data.stream) {
+        document.getElementById("newStreamTitle").value = "";
+        document.getElementById("newStreamDesc").value = "";
+        selectedStreamId = res.data.stream.id;
+        await loadStreams();
+        await selectStream(selectedStreamId);
+        switchTab("watch");
+      }
+    }
+
+    async function startStudioCamera() {
+      try {
+        stopStudioMedia();
+        studioMediaStream = await navigator.mediaDevices.getUserMedia({
+          video: { width: { ideal: 1280 }, height: { ideal: 720 } },
+          audio: true
+        });
+        attachStudioMediaStream(studioMediaStream, "Camera + Microphone Active");
+      } catch (err) {
+        document.getElementById("studioStatusNote").textContent =
+          "⚠️ Camera permission not granted or unavailable — using RJ Studio Synthetic HD Broadcast Generator (still 100% live-streamable to viewers!).";
+      }
+    }
+
+    async function startStudioScreenShare() {
+      try {
+        stopStudioMedia();
+        studioMediaStream = await navigator.mediaDevices.getDisplayMedia({
+          video: true,
+          audio: true
+        });
+        attachStudioMediaStream(studioMediaStream, "Screen Share Active");
+      } catch (err) {
+        document.getElementById("studioStatusNote").textContent =
+          "⚠️ Screen share cancelled — using RJ Studio Synthetic HD Broadcast Generator.";
+      }
+    }
+
+    function attachStudioMediaStream(stream, label) {
+      const video = document.getElementById("studioPreviewVideo");
+      video.srcObject = stream;
+      video.play();
+
+      // Setup WebAudio microphone meter if audio track exists
+      if (stream.getAudioTracks().length > 0) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioContext.createMediaStreamSource(stream);
+        audioAnalyser = audioContext.createAnalyser();
+        audioAnalyser.fftSize = 256;
+        source.connect(audioAnalyser);
+      }
+      document.getElementById("studioStatusNote").textContent = `✅ ${label}. Click "GO LIVE TO VIEWERS NOW" to broadcast!`;
+    }
+
+    function stopStudioMedia() {
+      if (studioMediaStream) {
+        studioMediaStream.getTracks().forEach(t => t.stop());
+        studioMediaStream = null;
+      }
+      if (isBroadcastingLive) {
+        toggleBroadcastLive();
+      }
+    }
+
+    async function toggleBroadcastLive() {
+      const pill = document.getElementById("studioStatusPill");
+      const btn = document.getElementById("btnGoLiveNow");
+      const targetStreamId = document.getElementById("studioChannelSelect").value || selectedStreamId;
+
+      if (!isBroadcastingLive) {
+        isBroadcastingLive = true;
+        pill.style.background = "#dc2626";
+        pill.innerHTML = `<span class="live-dot"></span> BROADCASTING LIVE`;
+        btn.textContent = "⏹️ END LIVE BROADCAST";
+        document.getElementById("studioStatusNote").textContent =
+          `🔴 LIVE ON AIR! Streaming frames to Cloudflare Edge for channel "${targetStreamId}". Open the Watch Theater tab on any device to view live!`;
+
+        // Push live frames every 1.2s to Cloudflare Edge so all viewers receive the live feed
+        broadcastInterval = setInterval(async () => {
+          if (!isBroadcastingLive) return;
+          const canvas = document.getElementById("studioCompositeCanvas");
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.62);
+          await apiFetch(`/api/streams/${targetStreamId}/frame`, {
+            method: "POST",
+            body: JSON.stringify({
+              live_frame_data: dataUrl,
+              lower_third_headline: document.getElementById("studioLtHeadlineInput").value,
+              lower_third_subline: document.getElementById("studioLtSublineInput").value
+            })
+          });
+        }, 1200);
+      } else {
+        isBroadcastingLive = false;
+        if (broadcastInterval) clearInterval(broadcastInterval);
+        pill.style.background = "#475569";
+        pill.innerHTML = `<span class="live-dot"></span> STANDBY`;
+        btn.textContent = "🔴 2. GO LIVE TO VIEWERS NOW";
+        document.getElementById("studioStatusNote").textContent = "Broadcast ended. Channel returned to automated 24/7 studio loop.";
+      }
+    }
+
+    // =========================================================================
+    // REVENUE LEDGER & ANALYTICS
+    // =========================================================================
+    async function loadRevenueLedger() {
+      const res = await apiFetch("/api/monetization/ledger");
+      if (!res.ok) return;
+      const d = res.data;
+      document.getElementById("kpiTotalRevenue").textContent = `$${((d.total_revenue_cents || 0) / 100).toFixed(2)}`;
+      document.getElementById("kpiPaidSubscribers").textContent = d.paid_subscribers_count || 0;
+      document.getElementById("kpiTotalTips").textContent = `$${((d.total_tips_cents || 0) / 100).toFixed(2)}`;
+      document.getElementById("kpiTotalStreams").textContent = d.streams_count || streams.length;
+
+      const tbody = document.getElementById("ledgerTableBody");
+      tbody.innerHTML = (d.transactions || []).map(tx => `
+        <tr>
+          <td class="mono" style="font-size:12px;">${escapeHtml(tx.id)}</td>
+          <td><strong>${escapeHtml(tx.user_name)}</strong></td>
+          <td><span class="badge">${escapeHtml(tx.type)}</span></td>
+          <td class="mono" style="font-size:12px;">${escapeHtml(tx.payment_method)}</td>
+          <td>${escapeHtml(tx.note || "")}</td>
+          <td><strong style="color:#16a34a;">+$${(tx.amount_cents / 100).toFixed(2)}</strong></td>
+          <td style="font-size:12px; color:var(--rj-muted);">${new Date(tx.created_at).toLocaleTimeString()}</td>
+        </tr>
+      `).join("");
+    }
+
+    // =========================================================================
+    // AUTH & MODAL HELPERS
+    // =========================================================================
+    function switchTab(tab) {
+      ["watch", "studio", "revenue"].forEach(t => {
+        document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.toggle("active", t === tab);
+        document.getElementById(`panel${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.toggle("active", t === tab);
+      });
+      if (tab === "revenue") loadRevenueLedger();
+    }
+
+    function openAuthModal() { document.getElementById("authModal").classList.add("open"); }
+    function openUpgradeModal() { document.getElementById("upgradeModal").classList.add("open"); }
+    function openSuperchatModal() { document.getElementById("superchatModal").classList.add("open"); }
+    function closeModals() {
+      document.querySelectorAll(".modal-backdrop").forEach(m => m.classList.remove("open"));
+    }
+
+    function toggleAuthMode() {
+      const mode = document.getElementById("authModeSelect").value;
+      document.getElementById("authNameRow").style.display = mode === "register" ? "block" : "none";
+      document.getElementById("authRegisterTierRow").style.display = mode === "register" ? "block" : "none";
+    }
+
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const mode = document.getElementById("authModeSelect").value;
+      const email = document.getElementById("authEmailInput").value.trim();
+      const password = document.getElementById("authPasswordInput").value;
+      const name = document.getElementById("authNameInput").value.trim() || email.split("@")[0];
+      const subscription_tier = document.getElementById("authRegisterTier").value;
+
+      const endpoint = mode === "register" ? "/api/auth/register" : "/api/auth/login";
+      const res = await apiFetch(endpoint, {
+        method: "POST",
+        body: JSON.stringify({ email, password, name, subscription_tier })
+      });
+      if (res.ok && res.data.token) {
+        authToken = res.data.token;
+        localStorage.setItem("rj_stream_token", authToken);
+        currentUser = res.data.user;
+        updateUserUI();
+        closeModals();
+        await loadStreams();
+        await selectStream(selectedStreamId);
+      } else {
+        alert(res.data.error || "Authentication failed");
+      }
+    }
+
+    // =========================================================================
+    // REAL-TIME HD BROADCAST CANVAS RENDERER (VIEWER + STUDIO COMPOSITOR)
+    // =========================================================================
+    let frameTick = 0;
+    function renderBroadcastLoop() {
+      frameTick++;
+      const now = new Date();
+      document.getElementById("stageClock").textContent = now.toISOString().replace("T", " ").slice(0, 19) + " UTC";
+
+      // Update Mic Meter if active
+      if (audioAnalyser) {
+        const data = new Uint8Array(audioAnalyser.frequencyBinCount);
+        audioAnalyser.getByteFrequencyData(data);
+        const avg = data.reduce((a, b) => a + b, 0) / data.length;
+        currentMicLevel = Math.min(100, Math.round((avg / 128) * 100));
+        document.getElementById("micMeterFill").style.width = `${currentMicLevel}%`;
+        document.getElementById("micDbLabel").textContent = `${Math.round(-45 + (currentMicLevel * 0.45))} dB`;
+      } else if (isBroadcastingLive) {
+        currentMicLevel = 35 + Math.round(Math.sin(frameTick * 0.15) * 25);
+        document.getElementById("micMeterFill").style.width = `${currentMicLevel}%`;
+        document.getElementById("micDbLabel").textContent = `-12 dB (Synth Audio)`;
+      }
+
+      // Draw Viewer Broadcast Feed
+      drawExecutiveBroadcastCanvas(document.getElementById("viewerSimCanvas"), false);
+      // Draw Studio Compositor (uses real webcam/screen video if active!)
+      drawExecutiveBroadcastCanvas(document.getElementById("studioCompositeCanvas"), true);
+
+      requestAnimationFrame(renderBroadcastLoop);
+    }
+
+    function drawExecutiveBroadcastCanvas(canvas, isStudio) {
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const w = canvas.width;
+      const h = canvas.height;
+
+      const previewVideo = document.getElementById("studioPreviewVideo");
+      if (isStudio && studioMediaStream && previewVideo && previewVideo.readyState >= 2) {
+        ctx.drawImage(previewVideo, 0, 0, w, h);
+      } else {
+        // Executive RJ Business Solutions Live Broadcast Graphic Feed
+        const grad = ctx.createLinearGradient(0, 0, w, h);
+        grad.addColorStop(0, "#0f172a");
+        grad.addColorStop(0.55, "#1e3a8a");
+        grad.addColorStop(1, "#1d4ed8");
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+
+        // Subtle animated grid lines
+        ctx.strokeStyle = "rgba(191, 219, 254, 0.08)";
+        ctx.lineWidth = 1;
+        const offset = (frameTick * 0.6) % 48;
+        for (let x = offset; x < w; x += 48) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+        }
+        for (let y = offset; y < h; y += 48) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+        }
+
+        // Center Executive Broadcast Card
+        ctx.fillStyle = "rgba(15, 23, 42, 0.72)";
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.45)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(w * 0.14, h * 0.18, w * 0.72, h * 0.54, 18);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = "700 16px 'Space Grotesk', sans-serif";
+        ctx.fillText("RJ BUSINESS SOLUTIONS · SOVEREIGN LIVE STREAM NETWORK", w * 0.18, h * 0.27);
+
+        const activeStream = streams.find(x => x.id === selectedStreamId);
+        const titleText = activeStream ? activeStream.title : "RJ Stream Live Broadcast";
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "700 26px 'Space Grotesk', sans-serif";
+        ctx.fillText(titleText.slice(0, 52), w * 0.18, h * 0.36);
+
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "500 16px 'Inter', sans-serif";
+        ctx.fillText("Host: Rick Jefferson, CEO · WebRTC Sub-Second Edge Stream + Live SuperChat", w * 0.18, h * 0.43);
+
+        // Dynamic Audio Waveform Bars
+        const barCount = 38;
+        const startX = w * 0.18;
+        const baseY = h * 0.63;
+        const barWidth = (w * 0.64) / barCount;
+        for (let i = 0; i < barCount; i++) {
+          const wave = Math.sin((frameTick * 0.12) + i * 0.45) * 0.5 + 0.5;
+          const barH = 12 + wave * 64;
+          ctx.fillStyle = i % 2 === 0 ? "#38bdf8" : "#2563eb";
+          ctx.fillRect(startX + i * barWidth, baseY - barH, barWidth - 5, barH);
+        }
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
