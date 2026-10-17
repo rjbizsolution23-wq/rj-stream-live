@@ -1,8 +1,10 @@
 -- ============================================================================
--- RJ STREAM LIVE v2.0 — Sovereign Live Streaming, Payments, Workflows, Chat & Monetization Schema
+-- RJ STREAM LIVE v3.0 — Sovereign Live Streaming, Payments, Workflows, Integrations & White-Label SaaS Schema
 -- Engineered exclusively for Rick Jefferson | RJ Business Solutions
 -- ============================================================================
 
+DROP TABLE IF EXISTS saas_tenants;
+DROP TABLE IF EXISTS integrations;
 DROP TABLE IF EXISTS workflow_runs;
 DROP TABLE IF EXISTS workflow_rules;
 DROP TABLE IF EXISTS affiliates;
@@ -390,3 +392,54 @@ INSERT INTO chat_messages (id, stream_id, user_id, user_name, user_role, user_ti
   ('msg_4', 'str_vip_mastermind', 'usr_rick_admin', 'Rick Jefferson (CEO & Broadcaster)', 'creator', 'executive_annual', 'VIP Inner Circle: We are walking through the deterministic credit & underwriting workflows step-by-step.', 0, 0, '', 1, 0, '2026-10-17T15:46:00Z'),
   ('msg_5', 'str_vip_mastermind', 'usr_vip_member', 'Marcus Vance (VIP Member)', 'vip', 'vip_monthly', 'Audio and video are crystal clear on the VIP stream. Taking notes!', 0, 0, '💎 Diamond', 0, 0, '2026-10-17T15:50:00Z'),
   ('msg_6', 'str_ppv_summit', 'usr_rick_admin', 'Rick Jefferson (CEO & Broadcaster)', 'creator', 'executive_annual', 'Welcome to the Pay-Per-View Live Bootcamp! Full source code and agent prompts are linked in the In-Stream Offer Drop below.', 0, 0, '', 1, 0, '2026-10-17T16:01:00Z');
+
+-- ============================================================================
+-- v3.0 TABLES: INTEGRATIONS HUB & WHITE-LABEL COMMERCIAL SAAS TENANTS
+-- ============================================================================
+
+CREATE TABLE integrations (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  category TEXT NOT NULL,
+  provider TEXT NOT NULL,
+  description TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'connected', -- 'connected', 'ready'
+  endpoint_or_key TEXT NOT NULL,
+  config_json TEXT NOT NULL DEFAULT '{}',
+  is_enabled INTEGER NOT NULL DEFAULT 1,
+  tests_count INTEGER NOT NULL DEFAULT 1,
+  last_tested_at TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
+
+CREATE TABLE saas_tenants (
+  id TEXT PRIMARY KEY,
+  slug TEXT UNIQUE NOT NULL,
+  brand_name TEXT NOT NULL,
+  owner_name TEXT NOT NULL,
+  owner_email TEXT NOT NULL,
+  custom_domain TEXT NOT NULL,
+  logo_url TEXT NOT NULL,
+  primary_color TEXT NOT NULL DEFAULT '#2563eb',
+  plan_tier TEXT NOT NULL DEFAULT 'agency_pro', -- 'creator_starter', 'agency_pro', 'whitelabel_empire'
+  monthly_price_cents INTEGER NOT NULL DEFAULT 29700,
+  status TEXT NOT NULL DEFAULT 'active',
+  transaction_id TEXT NOT NULL DEFAULT '',
+  created_at TEXT NOT NULL
+);
+
+INSERT INTO integrations (id, name, category, provider, description, status, endpoint_or_key, config_json, is_enabled, tests_count, last_tested_at, created_at) VALUES
+  ('int_stripe', 'Stripe Checkout, Subscriptions & Apple/Google Pay', 'Payments & Billing', 'Stripe', 'Processes instant VIP/Executive recurring subscriptions, PPV tickets, SuperChats, Virtual Gifts, and Flash Offers.', 'connected', 'pk_live_51RjStreamSovereignKey • Webhook Active', '{"currency":"USD","apple_pay":true,"google_pay":true,"auto_tax":true}', 1, 42, '2026-10-17T16:10:00Z', '2026-10-17T15:00:00Z'),
+  ('int_ghl_crm', 'GoHighLevel (GHL) & LeadConnector CRM Sync', 'CRM & Funnels', 'GoHighLevel', 'Automatically tags new viewers, VIP buyers, PPV ticket holders, and Flash Offer customers in GoHighLevel pipelines.', 'connected', 'https://services.leadconnectorhq.com/hooks/rj-stream-master', '{"location_id":"qQnxRHDtyx0uydPd5sRl","auto_opportunity":true}', 1, 38, '2026-10-17T16:11:00Z', '2026-10-17T15:00:00Z'),
+  ('int_cf_stream', 'Cloudflare Stream & Sub-Second WebRTC WHIP/WHEP', 'Video & Edge CDN', 'Cloudflare Stream', 'Global edge ingest (WHIP/RTMP) and sub-second WebRTC/HLS playback with automatic cloud VOD recording.', 'connected', 'rtmps://live.cloudflare.com:443/live/rj_live_key_free_99481a', '{"low_latency_whep":true,"auto_record_vod":true}', 1, 29, '2026-10-17T16:12:00Z', '2026-10-17T15:00:00Z'),
+  ('int_restream', 'Multi-Platform Simulcast (YouTube, TikTok, X, LinkedIn)', 'Simulcast Relay', 'Restream / RTMP', 'Simultaneously broadcasts your public teaser stream to YouTube Live, TikTok Live, X/Twitter, and LinkedIn Live.', 'connected', 'rtmp://live.restream.io/live/re_rj_simulcast_8821', '{"youtube":true,"tiktok":true,"twitter_x":true,"linkedin":true}', 1, 19, '2026-10-17T16:13:00Z', '2026-10-17T15:00:00Z'),
+  ('int_twilio_resend', 'Twilio SMS & Resend Email "We Are LIVE" Blasts', 'SMS & Email Alerts', 'Twilio + Resend', 'Sends 1-click instant SMS text alerts and executive HTML emails to all registered viewers when you go live.', 'connected', 'From: +1 (505) 555-0199 & live@rjbusinesssolutions.org', '{"sms_enabled":true,"email_enabled":true,"vip_priority":true}', 1, 24, '2026-10-17T16:14:00Z', '2026-10-17T15:00:00Z'),
+  ('int_obs_zoom', 'OBS Studio, Streamlabs & Zoom Live Bridge', 'Broadcast Encoders', 'OBS / Zoom', 'One-click RTMP/WHIP encoder profile for OBS Studio 31+, Streamlabs Desktop, and Zoom Custom Live Streaming.', 'connected', 'Server: rtmps://live.cloudflare.com:443/live/', '{"bitrate_kbps":6000,"keyframe_interval":2,"resolution":"1080p60"}', 1, 31, '2026-10-17T16:15:00Z', '2026-10-17T15:00:00Z'),
+  ('int_shopify_vault', 'Digital Product Vault & E-Commerce Fulfillment', 'Commerce & Courses', 'RJ Vault / Shopify', 'Instantly delivers digital downloads, course logins, and license keys when viewers buy an In-Stream Flash Offer.', 'connected', 'https://rjbusinesssolutions.org/vault/fulfill', '{"instant_license_key":true,"auto_invoice_pdf":true}', 1, 17, '2026-10-17T16:16:00Z', '2026-10-17T15:00:00Z'),
+  ('int_ai_cohost', 'RJ Cloudroom 222-Agent & 416-Skill AI Co-Host', 'Autonomous AI Swarm', 'RJ Cloudroom Core', 'Live AI Co-Host that posts real-time takeaways in chat, answers viewer Q&A, drops conversion CTAs, and writes titles.', 'connected', 'https://rj-cloudroom-core.rickjefferson.workers.dev/api/execute', '{"auto_summarize":true,"answer_qa":true,"sales_closer_mode":true}', 1, 53, '2026-10-17T16:17:00Z', '2026-10-17T15:00:00Z');
+
+INSERT INTO saas_tenants (id, slug, brand_name, owner_name, owner_email, custom_domain, logo_url, primary_color, plan_tier, monthly_price_cents, status, transaction_id, created_at) VALUES
+  ('ten_rj_flagship', 'rj-flagship', 'RJ Business Solutions Live', 'Rick Jefferson, CEO', 'rick@rjbusinesssolutions.org', 'stream.rjbusinesssolutions.org', 'https://storage.googleapis.com/msgsndr/qQnxRHDtyx0uydPd5sRl/media/67eb83c5e519ed689430646b.jpeg', '#2563eb', 'whitelabel_empire', 99700, 'active', 'tx_106', '2026-10-17T15:00:00Z'),
+  ('ten_apex_credit', 'apex-credit-academy', 'Apex Credit & Funding Academy TV', 'Marcus Vance', 'marcus@apexcreditacademy.com', 'live.apexcreditacademy.com', 'https://storage.googleapis.com/msgsndr/qQnxRHDtyx0uydPd5sRl/media/67eb83c5e519ed689430646b.jpeg', '#1e3a8a', 'agency_pro', 29700, 'active', 'tx_101', '2026-10-17T15:30:00Z'),
+  ('ten_sovereign_wealth', 'sovereign-wealth-network', 'Sovereign Wealth & AI Broadcast Network', 'Devon Brooks', 'devon@sovereignwealth.io', 'tv.sovereignwealth.io', 'https://storage.googleapis.com/msgsndr/qQnxRHDtyx0uydPd5sRl/media/67eb83c5e519ed689430646b.jpeg', '#0ea5e9', 'whitelabel_empire', 99700, 'active', 'tx_105', '2026-10-17T16:00:00Z');
+

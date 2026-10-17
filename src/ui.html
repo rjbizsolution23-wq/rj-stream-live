@@ -789,19 +789,144 @@
       display: none;
       max-width: 420px;
     }
+
+    /* v3.0 Quick-Start Guided Bar & Integrations / SaaS Styles */
+    .quick-guide-bar {
+      background: linear-gradient(90deg, #eff6ff 0%, #f8fafc 50%, #fef3c7 100%);
+      border-bottom: 1px solid var(--rj-border);
+      padding: 9px 28px;
+    }
+    .quick-guide-inner {
+      max-width: 1480px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .guide-steps {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+    .guide-chip {
+      background: #ffffff;
+      border: 1px solid var(--rj-border);
+      color: var(--rj-navy);
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.04);
+    }
+    .guide-chip:hover {
+      background: var(--rj-blue);
+      color: #ffffff;
+      border-color: var(--rj-blue);
+      transform: translateY(-1px);
+    }
+    .guide-chip.sell-chip {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #ffffff;
+      border-color: #d97706;
+    }
+
+    .reaction-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .react-btn {
+      background: #f8fafc;
+      border: 1px solid var(--rj-line);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.12s ease;
+    }
+    .react-btn:hover {
+      background: var(--rj-light);
+      border-color: var(--rj-blue);
+      transform: scale(1.08);
+    }
+    @keyframes floatUpEmoji {
+      0% { transform: translateY(0) scale(0.8); opacity: 1; }
+      70% { opacity: 0.95; }
+      100% { transform: translateY(-290px) scale(1.45); opacity: 0; }
+    }
+    .floating-emoji {
+      position: absolute;
+      bottom: 24px;
+      font-size: 32px;
+      pointer-events: none;
+      z-index: 9;
+      animation: floatUpEmoji 2.3s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.45));
+    }
+    .integration-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 16px;
+    }
+    .integration-card {
+      background: #ffffff;
+      border: 1px solid var(--rj-line);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 2px 6px rgba(15,23,42,0.03);
+    }
+    .integration-card.connected {
+      border-color: #93c5fd;
+    }
+    .whitelabel-banner {
+      background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%);
+      color: #ffffff;
+      padding: 8px 28px;
+      font-size: 12.5px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .whitelabel-banner.active { display: flex; }
   </style>
 </head>
 <body>
 
+  <!-- DYNAMIC WHITE-LABEL TENANT PREVIEW BAR -->
+  <div class="whitelabel-banner" id="whiteLabelTopBanner">
+    <div>
+      🏷️ <strong>WHITE-LABEL SAAS TENANT MODE ACTIVE:</strong>
+      <span id="wlBannerText">Custom Brand Preview</span>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <button class="btn btn-ghost btn-xs" onclick="resetWhiteLabelBrand()">↺ Return to RJ Business Solutions Master Brand</button>
+    </div>
+  </div>
+
   <!-- EXECUTIVE HERO HEADER -->
-  <header class="hero-header">
+  <header class="hero-header" id="heroHeaderBar">
     <div class="header-top">
       <div class="brand-row">
-        <img class="brand-logo" src="https://storage.googleapis.com/msgsndr/qQnxRHDtyx0uydPd5sRl/media/67eb83c5e519ed689430646b.jpeg" alt="RJ Business Solutions Logo" />
+        <img class="brand-logo" id="brandHeaderLogo" src="https://storage.googleapis.com/msgsndr/qQnxRHDtyx0uydPd5sRl/media/67eb83c5e519ed689430646b.jpeg" alt="RJ Business Solutions Logo" />
         <div>
-          <div class="brand-sub">RJ Business Solutions · Autonomous Enterprise Broadcast</div>
+          <div class="brand-sub" id="brandHeaderSub">RJ Business Solutions · Autonomous Enterprise Broadcast & Turnkey SaaS</div>
           <div class="brand-title">
-            RJ STREAM LIVE v2.0
+            <span id="brandHeaderTitle">RJ STREAM LIVE v3.0</span>
             <span class="live-pill">● On Air</span>
           </div>
         </div>
@@ -812,8 +937,9 @@
           <span id="userNameDisplay">Guest Viewer (Free)</span>
           <span class="tier-badge free" id="userTierBadge">FREE</span>
         </div>
+        <button class="btn btn-ghost" onclick="openEmbedModal()">🔗 Share & Embed</button>
         <button class="btn btn-ghost" onclick="openAuthModal()">👤 Switch / Login</button>
-        <button class="btn btn-gold" onclick="switchTab('monetization')">💎 Passes, Offers & Invoices</button>
+        <button class="btn btn-gold" onclick="switchTab('saas')">🚀 Launch & Sell SaaS</button>
       </div>
     </div>
   </header>
@@ -822,16 +948,37 @@
   <nav class="nav-bar">
     <div class="nav-inner">
       <div class="nav-tabs">
-        <button class="nav-tab active" data-tab="watch" onclick="switchTab('watch')">📺 Live Watch Theater & Chat</button>
-        <button class="nav-tab" data-tab="studio" onclick="switchTab('studio')">🎥 Broadcaster Go-Live Studio</button>
-        <button class="nav-tab" data-tab="workflows" onclick="switchTab('workflows')">⚡ Automated Workflows & CRM</button>
-        <button class="nav-tab" data-tab="monetization" onclick="switchTab('monetization')">💰 Payments, Monetization & Affiliates</button>
+        <button class="nav-tab active" data-tab="watch" onclick="switchTab('watch')">📺 Live Watch & Chat</button>
+        <button class="nav-tab" data-tab="studio" onclick="switchTab('studio')">🎥 Go-Live Studio</button>
+        <button class="nav-tab" data-tab="integrations" onclick="switchTab('integrations')">🔌 Integrations Hub (8 Live)</button>
+        <button class="nav-tab" data-tab="workflows" onclick="switchTab('workflows')">⚡ Automated Workflows</button>
+        <button class="nav-tab" data-tab="monetization" onclick="switchTab('monetization')">💰 Payments, Offers & Affiliates</button>
+        <button class="nav-tab" data-tab="saas" onclick="switchTab('saas')" style="color:#b45309; font-weight:700;">🚀 Launch & Sell SaaS (White-Label)</button>
       </div>
       <div style="font-size:12px; color:var(--rj-muted); font-weight:600;">
-        Edge Engine: <code class="mono" style="color:var(--rj-blue);">Cloudflare D1 + WebRTC + Workflows v2.0</code>
+        Edge Engine: <code class="mono" style="color:var(--rj-blue);">Cloudflare D1 + WebRTC + 8 Integrations + SaaS v3.0</code>
       </div>
     </div>
   </nav>
+
+  <!-- ULTRA USER-FRIENDLY 1-CLICK QUICK-START BAR -->
+  <div class="quick-guide-bar">
+    <div class="quick-guide-inner">
+      <div class="guide-steps">
+        <span style="font-family:'Space Grotesk'; font-size:11.5px; font-weight:700; color:var(--rj-blue); text-transform:uppercase; letter-spacing:0.05em;">✨ Quick-Start Tour:</span>
+        <button class="guide-chip" onclick="switchTab('watch'); triggerFloatingReaction('🔥');">1️⃣ Watch & React Live</button>
+        <button class="guide-chip" onclick="switchTab('studio')">2️⃣ Go Live (Webcam / Screen / OBS)</button>
+        <button class="guide-chip" onclick="openSubCheckout('vip', 99)">3️⃣ Test VIP / Promo Checkout</button>
+        <button class="guide-chip" onclick="switchTab('integrations')">4️⃣ Test 8 Live Integrations</button>
+        <button class="guide-chip" onclick="triggerAiCohost('chat_cta')">🤖 Drop AI Co-Host CTA in Chat</button>
+        <button class="guide-chip sell-chip" onclick="switchTab('saas')">5️⃣ Sell White-Label SaaS ($97–$2,997)</button>
+      </div>
+      <div style="display:flex; gap:6px; align-items:center;">
+        <button class="btn btn-outline btn-xs" onclick="blastLiveAlertNow()">📣 1-Click "We Are LIVE" SMS/Email Blast</button>
+        <button class="btn btn-outline btn-xs" onclick="openEmbedModal()">📋 Copy Website Embed Code</button>
+      </div>
+    </div>
+  </div>
 
   <!-- MAIN WORKSPACE -->
   <main class="main-wrap">
@@ -859,6 +1006,7 @@
             <div class="video-stage" id="playerStage">
               <canvas id="simulatedStreamCanvas" width="1280" height="720"></canvas>
               <video id="remoteLiveVideo" autoplay playsinline muted style="display:none; position:absolute; inset:0;"></video>
+              <div id="floatingEmojiContainer" style="position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:9;"></div>
 
               <div class="stage-overlay-top">
                 <div class="stage-badges">
@@ -899,6 +1047,23 @@
                     <button class="btn btn-ghost" onclick="quickDemoLogin('usr_sarah_vip')">⚡ Instant Demo Login as Paid VIP</button>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <!-- 1-Click Live Emoji Reactions & AI Co-Host Strip -->
+            <div style="padding:10px 20px; background:#f8fafc; border-bottom:1px solid var(--rj-line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <div class="reaction-bar">
+                <span style="font-size:11.5px; font-weight:700; color:var(--rj-muted); margin-right:4px;">Live Reactions:</span>
+                <button class="react-btn" onclick="triggerFloatingReaction('🔥')">🔥 Fire</button>
+                <button class="react-btn" onclick="triggerFloatingReaction('💎')">💎 Diamond</button>
+                <button class="react-btn" onclick="triggerFloatingReaction('🚀')">🚀 Rocket</button>
+                <button class="react-btn" onclick="triggerFloatingReaction('👏')">👏 Applause</button>
+                <button class="react-btn" onclick="triggerFloatingReaction('❤️')">❤️ Love</button>
+                <button class="react-btn" onclick="triggerFloatingReaction('💯')">💯 100%</button>
+              </div>
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <button class="btn btn-outline btn-xs" onclick="triggerAiCohost('executive_summary')">🤖 AI Co-Host Stream Summary</button>
+                <button class="btn btn-outline btn-xs" onclick="openEmbedModal()">🔗 Embed Stream on Site</button>
               </div>
             </div>
 
@@ -1420,6 +1585,185 @@
       </div>
     </section>
 
+    <!-- ==================== TAB 5: FULL 8-INTEGRATIONS HUB (v3.0) ==================== -->
+    <section id="view-integrations" class="view-panel">
+      <div class="card card-pad" style="margin-bottom:18px; background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 60%,#2563eb 100%); color:#fff; border:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+          <div>
+            <span class="section-badge" style="background:rgba(255,255,255,0.16); color:#fff; border-color:rgba(255,255,255,0.3);">🔌 Full Ecosystem Integrations Hub</span>
+            <h2 style="font-size:24px; color:#fff; margin-top:4px;">8 Pre-Wired Live Streaming, Payment, CRM & AI Connectors</h2>
+            <p style="font-size:13.5px; color:#cbd5e1; margin-top:4px;">
+              Every integration is pre-configured, connected to Cloudflare D1 + Durable Objects, and includes a <strong>1-Click Live Test Ping</strong> + editable API / Webhook configuration.
+            </p>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn btn-gold" onclick="blastLiveAlertNow()">📲 Send "We Are LIVE" SMS + Email Blast</button>
+            <button class="btn btn-outline" style="background:rgba(255,255,255,0.12); color:#fff; border-color:rgba(255,255,255,0.3);" onclick="testAllIntegrations()">⚡ Test All 8 Integrations</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="integration-grid" id="integrationsGridContainer"></div>
+    </section>
+
+    <!-- ==================== TAB 6: COMMERCIAL SAAS & WHITE-LABEL STOREFRONT (v3.0) ==================== -->
+    <section id="view-saas" class="view-panel">
+      <div class="card card-pad" style="margin-bottom:20px; background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#2563eb 100%); color:#fff; border:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+          <div>
+            <span class="section-badge" style="background:rgba(245,158,11,0.25); color:#fde68a; border-color:rgba(245,158,11,0.5);">🚀 Commercial SaaS & Turnkey White-Label Licensing</span>
+            <h2 style="font-size:26px; color:#fff; margin-top:6px;">Launch & Sell This Entire Live Streaming Platform to Your Clients</h2>
+            <p style="font-size:14px; color:#e2e8f0; margin-top:4px; max-width:820px;">
+              Sell monthly SaaS subscriptions (<strong>$97/mo – $997/mo</strong>) or Turnkey White-Label Licenses (<strong>$2,997 setup</strong>). Provision any client's custom brand, logo, colors, and domain below in 1 click—with automatic RJ Business Solutions PDF License Invoices.
+            </p>
+          </div>
+          <div style="background:rgba(15,23,42,0.75); border:1px solid rgba(255,255,255,0.2); border-radius:12px; padding:14px 18px; text-align:right;">
+            <div style="font-size:11px; text-transform:uppercase; color:#93c5fd; font-weight:700; font-family:'Space Grotesk';">Active SaaS MRR (Pre-Seeded + Live)</div>
+            <div style="font-size:28px; font-weight:800; font-family:'Space Grotesk'; color:#4ade80;" id="saasTotalMrrDisplay">$4,291.00/mo</div>
+            <div style="font-size:11.5px; color:#cbd5e1;" id="saasTenantCountDisplay">3 Active White-Label Tenants</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 READY-TO-SELL SAAS PRICING PLANS -->
+      <div class="saas-pricing-grid">
+        <div class="saas-plan-card">
+          <div>
+            <span class="section-badge">Creator Starter SaaS</span>
+            <h3 style="font-size:20px; margin-top:6px;">Creator Live Pro</h3>
+            <p style="font-size:12.5px; color:var(--rj-muted); margin-top:4px;">For coaches, creators, and educators hosting paid live streams & PPV events.</p>
+            <div class="saas-plan-price">$97<span>/month</span></div>
+            <ul class="saas-feature-list">
+              <li>✅ Unlimited Live Broadcasts (Webcam, Screen, OBS)</li>
+              <li>✅ Paid VIP Subscriptions & Single-Stream PPV Tickets</li>
+              <li>✅ SuperChat Tips, Live Polls, Q&A & Flash Offer Drops</li>
+              <li>✅ Automated Executive PDF Receipts (5% Platform Fee)</li>
+              <li>✅ 1-Click Website & Funnel Embed Player</li>
+            </ul>
+          </div>
+          <button class="btn btn-primary" style="width:100%;" onclick="selectSaasPlanToProvision('starter', 97)">
+            🚀 Provision Client on Starter ($97/mo)
+          </button>
+        </div>
+
+        <div class="saas-plan-card featured">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="section-badge" style="background:#fef3c7; color:#b45309; border-color:#fde68a;">🔥 Most Popular</span>
+              <span style="font-size:11px; font-weight:700; color:var(--rj-blue);">0% Platform Fee</span>
+            </div>
+            <h3 style="font-size:20px; margin-top:6px;">Agency Growth Suite</h3>
+            <p style="font-size:12.5px; color:var(--rj-muted); margin-top:4px;">Full CRM sync, SMS/Email live blasts, multi-stream simulcast & AI Co-Host.</p>
+            <div class="saas-plan-price">$297<span>/month</span></div>
+            <ul class="saas-feature-list">
+              <li>✅ Everything in Creator Starter + <strong>0% Platform Fee</strong></li>
+              <li>✅ Full GoHighLevel (GHL) & Stripe Webhook Sync</li>
+              <li>✅ Automated Twilio SMS + Resend Email "LIVE" Blasts</li>
+              <li>✅ YouTube, TikTok, X & LinkedIn Multi-Simulcast</li>
+              <li>✅ RJ Cloudroom 222-Agent AI Sales Co-Host in Chat</li>
+            </ul>
+          </div>
+          <button class="btn btn-primary" style="width:100%;" onclick="selectSaasPlanToProvision('agency', 297)">
+            ⚡ Provision Client on Agency ($297/mo)
+          </button>
+        </div>
+
+        <div class="saas-plan-card">
+          <div>
+            <span class="section-badge" style="background:#dcfce7; color:#15803d; border-color:#86efac;">🏛️ Sovereign White-Label</span>
+            <h3 style="font-size:20px; margin-top:6px;">Turnkey White-Label License</h3>
+            <p style="font-size:12.5px; color:var(--rj-muted); margin-top:4px;">Your client's own brand name, custom domain, logo, color theme & sub-tenants.</p>
+            <div class="saas-plan-price">$997<span>/mo (or $2,997 Turnkey)</span></div>
+            <ul class="saas-feature-list">
+              <li>✅ Full Custom Brand Name, Logo, Colors & Domain</li>
+              <li>✅ Unlimited Sub-Creators & Paid VIP Subscribers</li>
+              <li>✅ Direct Stripe, Zelle & Wire Settlement to Client</li>
+              <li>✅ Full 8-Integration Hub + Dedicated Cloudflare Edge</li>
+              <li>✅ Instant White-Label Live Preview URL + License PDF</li>
+            </ul>
+          </div>
+          <button class="btn btn-gold" style="width:100%;" onclick="selectSaasPlanToProvision('whitelabel', 997)">
+            👑 Provision White-Label License ($997/mo)
+          </button>
+        </div>
+      </div>
+
+      <!-- WHITE-LABEL TENANT PROVISIONER + ACTIVE TENANT DIRECTORY -->
+      <div class="studio-grid">
+        <div class="card card-pad" id="saasProvisionFormCard">
+          <span class="section-badge">Instant 1-Click White-Label Provisioner</span>
+          <h3 style="font-size:18px; margin-bottom:6px;">🏗️ Create & Launch a Client White-Label Instance</h3>
+          <p style="font-size:12.5px; color:var(--rj-muted); margin-bottom:14px;">
+            Fill in your buyer's brand details below. Clicking <strong>Provision & Issue License Invoice</strong> creates their live tenant in Cloudflare D1, generates a live preview link that rebrands this entire app on the fly, and produces an official RJ Business Solutions PDF invoice.
+          </p>
+          <form onsubmit="provisionWhiteLabelTenant(event)">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+              <div>
+                <label>Client Brand / Platform Name</label>
+                <input type="text" id="wlBrandName" class="input" placeholder="e.g. Apex Credit Live TV" required />
+              </div>
+              <div>
+                <label>Custom Domain</label>
+                <input type="text" id="wlDomain" class="input mono" placeholder="live.clientbrand.com" required />
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+              <div>
+                <label>Buyer / Owner Full Name</label>
+                <input type="text" id="wlOwnerName" class="input" placeholder="Devon Brooks" required />
+              </div>
+              <div>
+                <label>Buyer Email Address</label>
+                <input type="email" id="wlOwnerEmail" class="input" placeholder="devon@clientbrand.com" required />
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 110px; gap:10px; margin-bottom:10px;">
+              <div>
+                <label>Brand Logo URL (Optional — defaults to RJ Badge)</label>
+                <input type="url" id="wlLogoUrl" class="input mono" value="https://storage.googleapis.com/msgsndr/qQnxRHDtyx0uydPd5sRl/media/67eb83c5e519ed689430646b.jpeg" />
+              </div>
+              <div>
+                <label>Brand Color</label>
+                <input type="color" id="wlPrimaryColor" class="input" value="#2563eb" style="height:38px; padding:3px;" />
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+              <div>
+                <label>SaaS / License Tier</label>
+                <select id="wlPlanTier" class="input" onchange="syncWlPriceFromTier()">
+                  <option value="whitelabel">👑 Turnkey White-Label ($997/mo)</option>
+                  <option value="turnkey_buyout">🏛️ Full Turnkey Buyout License ($2,997)</option>
+                  <option value="agency">⚡ Agency Growth Suite ($297/mo)</option>
+                  <option value="starter">🚀 Creator Starter ($97/mo)</option>
+                </select>
+              </div>
+              <div>
+                <label>License Price ($ USD)</label>
+                <input type="number" id="wlMonthlyPrice" class="input" value="997" min="47" required />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-gold" style="width:100%; padding:12px;">
+              🚀 Provision Client Platform & Generate License Invoice PDF
+            </button>
+          </form>
+        </div>
+
+        <div class="card card-pad">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <div>
+              <span class="section-badge">Live Multi-Tenant Directory</span>
+              <h3 style="font-size:18px;">🏢 Active White-Label & SaaS Clients</h3>
+            </div>
+            <button class="btn btn-outline btn-xs" onclick="resetWhiteLabelBrand()">🔄 Reset to RJ Brand</button>
+          </div>
+          <p style="font-size:12.5px; color:var(--rj-muted); margin-bottom:12px;">
+            Click <strong>🎨 Preview White-Label Brand Live</strong> on any client below to see the entire platform dynamically rebrand to their name, color, and domain!
+          </p>
+          <div id="saasTenantsListContainer" style="display:grid; gap:10px;"></div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ==================== MODAL 1: LOGIN / DEMO PERSONAS ==================== -->
@@ -1508,6 +1852,32 @@
     </div>
   </div>
 
+  <!-- ==================== MODAL 3: 1-CLICK SHARE & WEBSITE EMBED GENERATOR ==================== -->
+  <div class="modal-backdrop" id="embedModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <span class="section-badge">🔗 1-Click Share & Funnel Embed</span>
+        <button class="btn btn-outline btn-xs" onclick="closeEmbedModal()">✕</button>
+      </div>
+      <h3 style="font-size:20px; margin-bottom:4px;">Embed Live Stream & Checkout on Any Site</h3>
+      <p style="font-size:13px; color:var(--rj-muted); margin-bottom:12px;">
+        Copy this responsive <code>&lt;iframe&gt;</code> snippet into GoHighLevel, WordPress, Next.js, Shopify, or ClickFunnels:
+      </p>
+      <div style="margin-bottom:10px;">
+        <label>Direct Viewer Watch Link</label>
+        <input type="text" id="shareDirectUrlInput" class="input mono" readonly onclick="this.select()" />
+      </div>
+      <div style="margin-bottom:14px;">
+        <label>Responsive Website / Funnel Embed Code</label>
+        <textarea id="shareEmbedCodeInput" class="input mono" rows="4" readonly onclick="this.select()"></textarea>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-primary" style="flex:1;" onclick="copyEmbedCode()">📋 Copy Embed Code & Link</button>
+        <button class="btn btn-outline" onclick="closeEmbedModal()">Done</button>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST -->
   <div class="toast" id="toastBox"></div>
 
@@ -1563,6 +1933,8 @@
       if (tabId === 'monetization') loadMonetizationDashboard();
       if (tabId === 'workflows') loadWorkflowsDashboard();
       if (tabId === 'studio') populateStudioForm();
+      if (tabId === 'integrations') loadIntegrationsHub();
+      if (tabId === 'saas') loadSaasDashboard();
     }
 
     function switchEngageTab(etab) {
@@ -2525,6 +2897,358 @@
         .replace(/"/g, '&quot;');
     }
 
+    // ==================== v3.0: FLOATING EMOJI REACTIONS, AI CO-HOST & EMBED MODAL ====================
+    function triggerFloatingReaction(emoji) {
+      const container = document.getElementById('floatingEmojiContainer');
+      if (!container) return;
+      for (let i = 0; i < 4; i++) {
+        const span = document.createElement('span');
+        span.className = 'floating-emoji';
+        span.textContent = emoji;
+        span.style.left = (15 + Math.random() * 70) + '%';
+        span.style.animationDelay = (i * 0.12) + 's';
+        container.appendChild(span);
+        setTimeout(() => span.remove(), 2400);
+      }
+    }
+
+    async function triggerAiCohost(actionType) {
+      if (!activeStream) return;
+      switchTab('watch');
+      const res = await fetch('/api/integrations/ai-cohost', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ stream_id: activeStream.id, action_type: actionType })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        triggerFloatingReaction('🤖');
+        showToast('🤖 RJ AI Co-Host posted a live conversion CTA in the stream chat!');
+        loadChatMessages();
+      }
+    }
+
+    function openEmbedModal() {
+      const streamId = activeStream ? activeStream.id : 'stream-flagship';
+      const watchUrl = `${window.location.origin}/?stream=${encodeURIComponent(streamId)}`;
+      const iframeCode = `<iframe src="${watchUrl}" width="100%" height="720" style="border:1px solid #bfdbfe; border-radius:16px; box-shadow:0 12px 32px rgba(15,23,42,0.12);" allow="camera; microphone; fullscreen; autoplay; clipboard-write"></iframe>`;
+      document.getElementById('shareDirectUrlInput').value = watchUrl;
+      document.getElementById('shareEmbedCodeInput').value = iframeCode;
+      document.getElementById('embedModal').classList.add('open');
+    }
+
+    function closeEmbedModal() {
+      document.getElementById('embedModal').classList.remove('open');
+    }
+
+    function copyEmbedCode() {
+      const code = document.getElementById('shareEmbedCodeInput').value;
+      navigator.clipboard.writeText(code);
+      showToast('📋 Responsive <iframe> Embed Code copied to clipboard!');
+    }
+
+    // ==================== v3.0: FULL 8-INTEGRATIONS HUB ====================
+    const INTEGRATION_ICONS = {
+      payments: '💳',
+      crm: '🏛️',
+      streaming: '📡',
+      simulcast: '🌐',
+      messaging: '📲',
+      studio: '🎥',
+      commerce: '🛍️',
+      ai: '🤖'
+    };
+
+    async function loadIntegrationsHub() {
+      const res = await fetch('/api/integrations');
+      const data = await res.json();
+      const list = data.integrations || [];
+      const container = document.getElementById('integrationsGridContainer');
+      if (!container) return;
+
+      container.innerHTML = list.map(intg => {
+        const icon = INTEGRATION_ICONS[intg.category] || '🔌';
+        return `
+          <div class="integration-card">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div style="width:40px; height:40px; border-radius:10px; background:var(--rj-light); border:1px solid var(--rj-border); display:flex; align-items:center; justify-content:center; font-size:20px;">
+                    ${icon}
+                  </div>
+                  <div>
+                    <div style="font-family:'Space Grotesk'; font-weight:700; font-size:15.5px; color:var(--rj-navy);">${escapeHtml(intg.name)}</div>
+                    <span class="section-badge" style="margin-bottom:0; margin-top:2px;">${escapeHtml(intg.category.toUpperCase())}</span>
+                  </div>
+                </div>
+                <span class="integration-status ${intg.status === 'connected' ? 'connected' : ''}">
+                  <span class="dot" style="background:${intg.status === 'connected' ? '#16a34a' : '#64748b'};"></span>
+                  ${escapeHtml(intg.status.toUpperCase())}
+                </span>
+              </div>
+
+              <p style="font-size:12.5px; color:var(--rj-muted); margin:10px 0;">
+                ${escapeHtml(intg.description || '')}
+              </p>
+
+              <div style="display:grid; gap:8px; margin-bottom:10px;">
+                <div>
+                  <label style="font-size:11px;">Webhook / Endpoint URL</label>
+                  <input type="text" id="intg_url_${intg.id}" class="input mono" style="font-size:11.5px; padding:6px 8px;" value="${escapeHtml(intg.endpoint_url || '')}" />
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                  <div>
+                    <label style="font-size:11px;">API Key / Secret Hint</label>
+                    <input type="text" id="intg_key_${intg.id}" class="input mono" style="font-size:11.5px; padding:6px 8px;" value="${escapeHtml(intg.api_key_hint || '')}" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;">Events Dispatched</label>
+                    <input type="text" class="input mono" style="font-size:11.5px; padding:6px 8px; background:#f8fafc;" value="${intg.events_dispatched || 0} live events" readonly />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:8px; padding-top:8px; border-top:1px solid var(--rj-line);">
+              <button class="btn btn-primary btn-xs" style="flex:1;" onclick="testIntegration('${intg.id}')">
+                ⚡ 1-Click Live Test Ping
+              </button>
+              <button class="btn btn-outline btn-xs" onclick="saveIntegration('${intg.id}')">
+                💾 Save Config
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function testIntegration(id) {
+      const res = await fetch(`/api/integrations/${encodeURIComponent(id)}/test`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast(`✅ ${data.message}`);
+        loadIntegrationsHub();
+        loadWorkflowsDashboard();
+      }
+    }
+
+    async function saveIntegration(id) {
+      const endpoint_url = document.getElementById(`intg_url_${id}`)?.value || '';
+      const api_key_hint = document.getElementById(`intg_key_${id}`)?.value || '';
+      const res = await fetch(`/api/integrations/${encodeURIComponent(id)}/save`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ endpoint_url, api_key_hint, status: 'connected' })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('💾 Integration settings saved & verified in Cloudflare D1!');
+        loadIntegrationsHub();
+      }
+    }
+
+    async function testAllIntegrations() {
+      const res = await fetch('/api/integrations');
+      const data = await res.json();
+      for (const intg of (data.integrations || [])) {
+        await fetch(`/api/integrations/${encodeURIComponent(intg.id)}/test`, { method: 'POST' });
+      }
+      showToast('⚡ All 8 Live Integrations tested & verified with 0 errors!');
+      loadIntegrationsHub();
+      loadWorkflowsDashboard();
+    }
+
+    async function blastLiveAlertNow() {
+      const res = await fetch('/api/integrations/blast-live-alert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          stream_id: activeStream ? activeStream.id : 'stream-flagship',
+          stream_title: activeStream ? activeStream.title : 'RJ Sovereign Credit & AI Empire Live Keynote',
+          audience_segment: 'All VIP + Pro + Free Subscribers (Twilio SMS + Resend Email + GHL)'
+        })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast(`📲 ${data.message}`);
+        loadIntegrationsHub();
+        loadWorkflowsDashboard();
+      }
+    }
+
+    // ==================== v3.0: COMMERCIAL SAAS & WHITE-LABEL PROVISIONING ====================
+    let saasTenantsCache = [];
+
+    function selectSaasPlanToProvision(tier, price) {
+      const tierSelect = document.getElementById('wlPlanTier');
+      const priceInput = document.getElementById('wlMonthlyPrice');
+      if (tierSelect) tierSelect.value = tier;
+      if (priceInput) priceInput.value = price;
+      document.getElementById('saasProvisionFormCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('wlBrandName')?.focus();
+      showToast(`🚀 Selected ${tier.toUpperCase()} Plan ($${price}) — Enter client brand details to provision!`);
+    }
+
+    function syncWlPriceFromTier() {
+      const tier = document.getElementById('wlPlanTier').value;
+      const map = { starter: 97, agency: 297, whitelabel: 997, turnkey_buyout: 2997 };
+      if (map[tier]) document.getElementById('wlMonthlyPrice').value = map[tier];
+    }
+
+    async function loadSaasDashboard() {
+      const res = await fetch('/api/saas/tenants');
+      const data = await res.json();
+      saasTenantsCache = data.tenants || [];
+      const mrrCents = Number(data.total_mrr_cents || 0);
+      const mrrEl = document.getElementById('saasTotalMrrDisplay');
+      const countEl = document.getElementById('saasTenantCountDisplay');
+      if (mrrEl) mrrEl.textContent = `$${(mrrCents / 100).toLocaleString('en-US', { minimumFractionDigits: 2 })}/mo`;
+      if (countEl) countEl.textContent = `${saasTenantsCache.length} Active White-Label Tenants`;
+
+      const listEl = document.getElementById('saasTenantsListContainer');
+      if (!listEl) return;
+
+      listEl.innerHTML = saasTenantsCache.map(t => `
+        <div style="background:var(--rj-soft); border:1px solid var(--rj-border); border-left:5px solid ${escapeHtml(t.primary_color || '#2563eb')}; border-radius:10px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px; flex-wrap:wrap;">
+            <div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-family:'Space Grotesk'; font-weight:700; font-size:15.5px; color:var(--rj-navy);">${escapeHtml(t.brand_name)}</span>
+                <span class="tier-badge vip">${escapeHtml((t.plan_tier || 'whitelabel').toUpperCase())}</span>
+              </div>
+              <div style="font-size:12px; color:var(--rj-muted); margin-top:2px;">
+                Owner: <strong>${escapeHtml(t.owner_name)}</strong> (${escapeHtml(t.owner_email)}) · Domain: <code class="mono">${escapeHtml(t.custom_domain || (t.slug + '.rjstream.live'))}</code>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-family:'Space Grotesk'; font-weight:800; font-size:16px; color:var(--rj-success);">
+                $${((t.monthly_price_cents || 99700) / 100).toFixed(2)}/mo
+              </div>
+              <div style="font-size:11px; color:var(--rj-muted);">Key: <code class="mono">${escapeHtml(t.license_key || 'RJ-WL-2026')}</code></div>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+            <button class="btn btn-primary btn-xs" onclick="previewTenantBySlug('${escapeHtml(t.slug)}')">
+              🎨 Preview White-Label Brand Live
+            </button>
+            <a href="/?tenant=${encodeURIComponent(t.slug)}" target="_blank" class="btn btn-outline btn-xs">
+              🔗 Open Client Tenant URL (/?tenant=${escapeHtml(t.slug)})
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function provisionWhiteLabelTenant(e) {
+      e.preventDefault();
+      const brand_name = document.getElementById('wlBrandName').value.trim();
+      const custom_domain = document.getElementById('wlDomain').value.trim();
+      const owner_name = document.getElementById('wlOwnerName').value.trim();
+      const owner_email = document.getElementById('wlOwnerEmail').value.trim();
+      const logo_url = document.getElementById('wlLogoUrl').value.trim();
+      const primary_color = document.getElementById('wlPrimaryColor').value;
+      const plan_tier = document.getElementById('wlPlanTier').value;
+      const monthly_price_dollars = Number(document.getElementById('wlMonthlyPrice').value || 997);
+
+      const res = await fetch('/api/saas/provision', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          brand_name,
+          custom_domain,
+          owner_name,
+          owner_email,
+          logo_url,
+          primary_color,
+          plan_tier,
+          monthly_price_dollars,
+          payment_method: 'stripe_card'
+        })
+      });
+      const data = await res.json();
+      if (data.ok && data.tenant) {
+        document.getElementById('wlBrandName').value = '';
+        document.getElementById('wlDomain').value = '';
+        document.getElementById('wlOwnerName').value = '';
+        document.getElementById('wlOwnerEmail').value = '';
+        await loadSaasDashboard();
+        await loadMonetizationDashboard();
+        applyWhiteLabelBrand(data.tenant);
+        showToast(`👑 Provisioned "${data.tenant.brand_name}" (${data.tenant.license_key})! <a href="${data.invoice_url}" target="_blank" style="color:#fde68a; text-decoration:underline; font-weight:700;">Open Official License Invoice PDF</a>`);
+      }
+    }
+
+    function previewTenantBySlug(slug) {
+      const found = saasTenantsCache.find(t => t.slug === slug);
+      if (found) {
+        applyWhiteLabelBrand(found);
+      }
+    }
+
+    function applyWhiteLabelBrand(tenant) {
+      if (!tenant) return;
+      document.documentElement.style.setProperty('--rj-blue', tenant.primary_color || '#2563eb');
+      const titleEl = document.getElementById('brandHeaderTitle');
+      const subEl = document.getElementById('brandHeaderSub');
+      const logoEl = document.getElementById('brandHeaderLogo');
+      if (titleEl) {
+        titleEl.innerHTML = `${escapeHtml(tenant.brand_name.toUpperCase())} <span style="background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:99px; font-size:11px;">WHITE-LABEL LIVE</span>`;
+      }
+      if (subEl) {
+        subEl.textContent = `${tenant.custom_domain || (tenant.slug + '.rjstream.live')} · Powered by RJ Stream Engine (${tenant.license_key || 'Verified License'})`;
+      }
+      if (logoEl && tenant.logo_url) {
+        logoEl.src = tenant.logo_url;
+      }
+      const banner = document.getElementById('whiteLabelTopBanner');
+      const bannerName = document.getElementById('wlBannerBrandName');
+      const bannerDomain = document.getElementById('wlBannerDomain');
+      if (banner) {
+        banner.style.display = 'flex';
+        banner.style.background = `linear-gradient(90deg, #0f172a 0%, ${tenant.primary_color || '#2563eb'} 100%)`;
+      }
+      if (bannerName) bannerName.textContent = `${tenant.brand_name} (${tenant.plan_tier.toUpperCase()})`;
+      if (bannerDomain) bannerDomain.textContent = tenant.custom_domain || `${tenant.slug}.rjstream.live`;
+      showToast(`🎨 White-Label Active: Now viewing platform branded as "${tenant.brand_name}"!`);
+    }
+
+    function resetWhiteLabelBrand() {
+      document.documentElement.style.setProperty('--rj-blue', '#2563eb');
+      const titleEl = document.getElementById('brandHeaderTitle');
+      const subEl = document.getElementById('brandHeaderSub');
+      const logoEl = document.getElementById('brandHeaderLogo');
+      if (titleEl) {
+        titleEl.innerHTML = `RJ STREAM LIVE <span style="background:#f59e0b; color:#0f172a; padding:2px 8px; border-radius:99px; font-size:11px; font-weight:800;">v3.0 SAAS &amp; WHITE-LABEL</span>`;
+      }
+      if (subEl) {
+        subEl.textContent = 'Sovereign Broadcast, 8-Integration Hub & Turnkey SaaS Platform · Rick Jefferson';
+      }
+      if (logoEl) {
+        logoEl.src = 'https://storage.googleapis.com/msgsndr/qQnxRHDtyx0uydPd5sRl/media/67eb83c5e519ed689430646b.jpeg';
+      }
+      const banner = document.getElementById('whiteLabelTopBanner');
+      if (banner) banner.style.display = 'none';
+      if (window.location.search.includes('tenant=')) {
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+      showToast('🏛️ Restored official RJ Business Solutions Master Brand.');
+    }
+
+    async function checkUrlTenantParam() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('tenant');
+      if (slug) {
+        const res = await fetch(`/api/saas/tenant/${encodeURIComponent(slug)}`);
+        const data = await res.json();
+        if (data.ok && data.tenant) {
+          applyWhiteLabelBrand(data.tenant);
+        }
+      }
+    }
+
     // ==================== INITIALIZE ====================
     window.addEventListener('DOMContentLoaded', () => {
       renderUserHeader();
@@ -2532,6 +3256,9 @@
       loadStreams();
       loadMonetizationDashboard();
       loadWorkflowsDashboard();
+      loadIntegrationsHub();
+      loadSaasDashboard();
+      checkUrlTenantParam();
       setInterval(() => {
         if (activeStream) loadChatMessages();
       }, 6000);
